@@ -141,7 +141,7 @@ export default function PortfolioGallery({ initialSubCategoryId, onSelectProject
   };
 
   return (
-    <section ref={portfolioSectionRef} id="portfolio" className="relative w-full py-24 md:py-32 bg-slate-925 border-y border-white/5 overflow-hidden">
+    <section ref={portfolioSectionRef} id="portfolio" className="relative w-full py-24 md:py-32 bg-transparent border-y border-white/5 overflow-hidden">
       {/* Decorative ambient visual or grids */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-3.5xl pointer-events-none" />

@@ -38,7 +38,7 @@ export default function Hero({ onLearnMore, onBookConsultation }: HeroProps) {
   }, []);
 
   return (
-    <section id="home" className="relative w-full min-h-screen bg-slate-950 flex flex-col justify-center overflow-hidden pt-20">
+    <section id="home" className="relative w-full min-h-screen bg-transparent flex flex-col justify-center overflow-hidden pt-20">
       {/* Background Slides */}
       {HERO_SLIDES.map((slide, idx) => (
         <div

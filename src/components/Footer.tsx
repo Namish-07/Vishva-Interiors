@@ -10,7 +10,7 @@ export default function Footer({ onScrollToSection }: FooterProps) {
   };
 
   return (
-    <footer className="relative bg-slate-950 border-t border-white/5 pt-20 pb-12 overflow-hidden">
+    <footer className="relative bg-transparent border-t border-white/5 pt-20 pb-12 overflow-hidden">
       {/* Decorative lighting */}
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
 

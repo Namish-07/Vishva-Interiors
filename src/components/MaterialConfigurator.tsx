@@ -126,7 +126,7 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
   };
 
   return (
-    <section id="studio" className="relative w-full py-24 md:py-32 bg-slate-950 border-t border-white/5 overflow-hidden">
+    <section id="studio" className="relative w-full py-24 md:py-32 bg-transparent border-t border-white/5 overflow-hidden">
       {/* Dynamic Background Amber/Teak Light */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3.5xl opacity-20 pointer-events-none transition-all duration-1000"

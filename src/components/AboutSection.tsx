@@ -7,7 +7,7 @@ export default function AboutSection() {
   const [activeTab, setActiveTab] = useState<"heritage" | "values">("heritage");
 
   return (
-    <section id="heritage" className="relative w-full py-24 md:py-32 bg-slate-950 border-t border-white/5">
+    <section id="heritage" className="relative w-full py-24 md:py-32 bg-transparent border-t border-white/5">
       {/* Dynamic ambient lights */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />

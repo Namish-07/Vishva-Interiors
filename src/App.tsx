@@ -8,6 +8,7 @@ import AboutSection from "./components/AboutSection";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
+import AnimatedBackgroundPattern from "./components/AnimatedBackgroundPattern";
 import { AnimatePresence } from "motion/react";
 
 export default function App() {
@@ -95,13 +96,16 @@ export default function App() {
       </AnimatePresence>
 
       <div 
-        className={`relative min-h-screen bg-slate-950 text-gray-100 flex flex-col font-sans transition-all duration-1000 ease-out will-change-transform ${
+        className={`relative min-h-screen bg-transparent text-gray-100 flex flex-col font-sans transition-all duration-1000 ease-out will-change-transform ${
           isLoading 
             ? "opacity-0 pointer-events-none invisible scale-98 blur-md" 
             : "opacity-100 visible scale-100 blur-0"
         }`}
       >
-      {/* 1. Header Bar */}
+        {/* Animated Architectural & Geometric Scrolling Background */}
+        <AnimatedBackgroundPattern />
+
+        {/* 1. Header Bar */}
       <Header 
         activeSection={activeSection} 
         onScrollToSection={handleScrollToSection} 

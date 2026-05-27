@@ -86,7 +86,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
   }, []);
 
   return (
-    <section id="contact" className="relative w-full py-24 md:py-32 bg-slate-925 border-t border-white/5 overflow-hidden">
+    <section id="contact" className="relative w-full py-24 md:py-32 bg-transparent border-t border-white/5 overflow-hidden">
       {/* Visual background lights */}
       <div className="absolute top-1/4 left-0 w-80 h-80 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-[200px] right-[-100px] w-96 h-96 bg-purple-700/5 rounded-full blur-3.5xl pointer-events-none" />
