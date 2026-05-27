@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, useMemo, ChangeEvent, FormEvent } from "react";
 import { ContactFormInput, Testimonial } from "../types";
 import { TESTIMONIALS, PRODUCT_CATEGORIES } from "../data";
 import { Mail, Phone, MapPin, Stars, Sparkles, Send, CheckCircle2, Clock, Calendar, HelpCircle, Compass, ChevronLeft, ChevronRight } from "lucide-react";
@@ -25,6 +25,39 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [isSent, setIsSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  // Dynamically calculate 45 future date selections based on local current time
+  const futureDates = useMemo(() => {
+    const list = [];
+    const now = new Date();
+    for (let i = 0; i < 45; i++) {
+      const nextDate = new Date();
+      nextDate.setDate(now.getDate() + i);
+      const isToday = i === 0;
+      
+      const dayName = nextDate.toLocaleDateString("en-US", { weekday: "short" }); // e.g. "Wed"
+      const monthName = nextDate.toLocaleDateString("en-US", { month: "short" }); // e.g. "May"
+      const dateNum = nextDate.getDate(); // e.g. 27
+      const year = nextDate.getFullYear();
+      
+      const valueStr = nextDate.toISOString().split("T")[0]; // "YYYY-MM-DD"
+      const labelStr = `${dayName}, ${monthName} ${dateNum}, ${year}${isToday ? " (Today)" : ""}`;
+      
+      list.push({
+        value: valueStr,
+        label: labelStr,
+        dayName,
+        dateNum,
+        monthName,
+        isToday
+      });
+    }
+    return list;
+  }, []);
+
+  const todayString = useMemo(() => {
+    return new Date().toISOString().split("T")[0];
+  }, []);
 
   // Hook into preFill options if they are triggered from other panels
   useEffect(() => {
@@ -232,8 +265,20 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
                 </div>
                 <div className="space-y-1">
                   <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wider">Electronic Transmission</h5>
-                  <span className="block font-sans text-xs text-gray-300 font-medium">
-                    consult@vishvainteriors.com • vishvainteriors@gmail.com
+                  <span className="block font-sans text-xs text-gray-300 font-medium flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                    <a 
+                      href="mailto:harnathm@gmail.com" 
+                      className="hover:text-gold-400 hover:underline transition-all cursor-pointer"
+                    >
+                      harnathm@gmail.com
+                    </a>
+                    <span className="text-gray-600">•</span>
+                    <a 
+                      href="mailto:bestrailingsrjy@gmail.com" 
+                      className="hover:text-gold-400 hover:underline transition-all cursor-pointer"
+                    >
+                      bestrailingsrjy@gmail.com
+                    </a>
                   </span>
                 </div>
               </div>
@@ -376,18 +421,86 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
                     </div>
 
                     {/* Slot reservation (Optional) */}
-                    <div className="space-y-1.5">
-                      <label htmlFor="appointmentDate-input" className="block text-[10px] font-mono text-gray-400 uppercase tracking-widest font-semibold">
-                        Requested Meeting Slot (Optional)
+                    <div className="space-y-2">
+                      <label className="block text-[10px] font-mono text-gray-400 uppercase tracking-widest font-semibold flex items-center justify-between">
+                        <span>Requested Meeting Slot</span>
+                        <span className="text-gold-400/80 font-normal">Future slots only</span>
                       </label>
-                      <input
-                        id="appointmentDate-input"
-                        type="date"
-                        name="appointmentDate"
-                        value={formData.appointmentDate}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-slate-950/80 border border-white/10 focus:border-gold-400 rounded-xl text-xs text-white focus:outline-none focus:ring-1 focus:ring-gold-400 transition-all placeholder-gray-600 font-sans"
-                      />
+                      
+                      {/* Interactive visual mini-calendar tabs of the next 5 days */}
+                      <div className="grid grid-cols-5 gap-2">
+                        {futureDates.slice(0, 5).map((dateObj) => {
+                          const isSelected = formData.appointmentDate === dateObj.value;
+                          return (
+                            <button
+                              key={dateObj.value}
+                              type="button"
+                              onClick={() => {
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  appointmentDate: dateObj.value
+                                }));
+                              }}
+                              className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl border transition-all cursor-pointer ${
+                                isSelected
+                                  ? "bg-gold-500/15 border-gold-400 text-white shadow-[0_0_12px_rgba(234,179,8,0.15)] ring-1 ring-gold-400/30"
+                                  : "bg-slate-950/40 border-white/5 text-gray-400 hover:text-white hover:border-white/15 hover:bg-slate-900/60"
+                              }`}
+                            >
+                              <span className="text-[9px] font-mono uppercase tracking-wider font-semibold">
+                                {dateObj.dayName}
+                              </span>
+                              <span className="text-sm font-bold tracking-tight my-0.5">
+                                {dateObj.dateNum}
+                              </span>
+                              <span className="text-[8px] opacity-70">
+                                {dateObj.monthName}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Extended custom calendar format picker */}
+                      <div className="relative pt-1 flex items-center">
+                        <input
+                          id="appointmentDate-input-custom"
+                          type="date"
+                          name="appointmentDate"
+                          min={todayString}
+                          value={formData.appointmentDate || ""}
+                          onChange={handleChange}
+                          onClick={(e) => {
+                            try {
+                              e.currentTarget.showPicker();
+                            } catch (err) {
+                              // Fallback support
+                            }
+                          }}
+                          onFocus={(e) => {
+                            try {
+                              e.currentTarget.showPicker();
+                            } catch (err) {
+                              // Fallback support
+                            }
+                          }}
+                          className="relative w-full px-4 py-2.5 pr-10 bg-slate-950/80 border border-white/10 focus:border-gold-400 rounded-xl text-xs text-white focus:outline-none focus:ring-1 focus:ring-gold-400 transition-all font-sans scheme-dark cursor-pointer text-left"
+                        />
+                        <Calendar className="absolute right-3.5 w-4 h-4 text-gold-400 pointer-events-none" />
+                        <style>{`
+                          #appointmentDate-input-custom::-webkit-calendar-picker-indicator {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            width: 100%;
+                            height: 100%;
+                            opacity: 0;
+                            cursor: pointer;
+                          }
+                        `}</style>
+                      </div>
                     </div>
 
                   </div>

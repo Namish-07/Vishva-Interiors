@@ -9,7 +9,8 @@ import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import AnimatedBackgroundPattern from "./components/AnimatedBackgroundPattern";
-import { AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowUp } from "lucide-react";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +19,19 @@ export default function App() {
   const [preFilledInterest, setPreFilledInterest] = useState("");
   const [preFilledMessage, setPreFilledMessage] = useState("");
   const [theme, setTheme] = useState<"light" | "dark">(15 < 20 ? "dark" : "light"); // fallback initial
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Robust client-only theme load to avoid SSR type mismatch
   useEffect(() => {
@@ -209,6 +223,26 @@ export default function App() {
 
       {/* 8. Global License Footers */}
       <Footer onScrollToSection={handleScrollToSection} />
+
+      {/* Floating Scroll To Top button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            key="scroll-to-top"
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-50 p-3.5 rounded-full border border-gold-400 bg-slate-950/90 text-gold-400 hover:text-white hover:bg-gold-500 shadow-[0_0_20px_rgba(234,179,8,0.25)] hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center group"
+            title="Scroll to top"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
     </>
   );
