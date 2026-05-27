@@ -1,0 +1,6 @@
+{
+  "name": "Vishva Interiors",
+  "description": "Premium architectural and interior solution provider in Andhra Pradesh, specializing in high-end glass, aluminum, PVD, brass, and resin epoxy products.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
