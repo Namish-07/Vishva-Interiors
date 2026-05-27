@@ -5,9 +5,16 @@ import InteractivePhone from "./InteractivePhone";
 interface HeaderProps {
   onScrollToSection: (sectionId: string) => void;
   activeSection: string;
+  theme?: "light" | "dark";
+  onToggleTheme?: () => void;
 }
 
-export default function Header({ onScrollToSection, activeSection }: HeaderProps) {
+export default function Header({ 
+  onScrollToSection, 
+  activeSection,
+  theme = "dark",
+  onToggleTheme
+}: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -101,14 +108,44 @@ export default function Header({ onScrollToSection, activeSection }: HeaderProps
             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
             Book Consultation
           </button>
+
+          {/* Premium Theme Switcher */}
+          {onToggleTheme && (
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              className="p-2 ml-1 rounded-full border border-gold-400/20 bg-gold-500/10 hover:bg-gold-500/20 text-gold-400 transition-all duration-300 flex items-center justify-center cursor-pointer relative overflow-hidden group shadow-md"
+              title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+            >
+              {theme === "light" ? (
+                <Moon className="w-4 h-4" />
+              ) : (
+                <Sun className="w-4 h-4 text-gold-400 group-hover:rotate-45 transition-transform duration-500" />
+              )}
+            </button>
+          )}
         </nav>
 
         {/* Mobile menu Button */}
-        <div className="flex items-center gap-4 lg:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
+          {onToggleTheme && (
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              className="p-1.5 rounded-lg border border-gold-400/20 bg-gold-500/10 text-gold-400 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-md"
+              title={theme === "light" ? "Switch to Dark" : "Switch to Light"}
+            >
+              {theme === "light" ? (
+                <Moon className="w-3.5 h-3.5" />
+              ) : (
+                <Sun className="w-3.5 h-3.5 text-gold-400" />
+              )}
+            </button>
+          )}
           <button
             type="button"
             onClick={() => handleNavClick("contact")}
-            className="px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-400/20 text-gold-400 font-sans text-[9px] tracking-widest uppercase"
+            className="px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-400/20 text-gold-400 font-sans text-[9px] tracking-widest uppercase font-medium"
           >
             Consult
           </button>

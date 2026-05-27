@@ -47,17 +47,7 @@ export default function AnimatedBackgroundPattern() {
       className="pointer-events-none absolute inset-y-0 left-0 right-0 -z-10 overflow-hidden bg-slate-950"
     >
       {/* 1. Subtle blueprints grid background (Extends to the full scrollable height of the document) */}
-      <div 
-        className="absolute inset-0 opacity-[0.045]"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle, rgba(212,175,55,0.15) 1px, transparent 1px),
-            linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: "24px 24px, 120px 120px",
-        }}
-      />
+      <div className="absolute inset-0 blueprint-grid" />
 
       {/* ================= SECTION 1: HERO / TOP RIGHT (VISHVA GLASS_01) ================= */}
       <div 

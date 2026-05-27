@@ -17,6 +17,30 @@ export default function App() {
   const [galleryFilterId, setGalleryFilterId] = useState("");
   const [preFilledInterest, setPreFilledInterest] = useState("");
   const [preFilledMessage, setPreFilledMessage] = useState("");
+  const [theme, setTheme] = useState<"light" | "dark">(15 < 20 ? "dark" : "light"); // fallback initial
+
+  // Robust client-only theme load to avoid SSR type mismatch
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      root.classList.add("dark");
+      root.classList.remove("light");
+      localStorage.setItem("theme", "dark");
+    }
+  }, [theme]);
 
   const handleScrollToSection = (sectionId: string) => {
     const targetElement = document.getElementById(sectionId);
@@ -96,7 +120,7 @@ export default function App() {
       </AnimatePresence>
 
       <div 
-        className={`relative min-h-screen bg-transparent text-gray-100 flex flex-col font-sans transition-all duration-1000 ease-out will-change-transform ${
+        className={`relative min-h-screen bg-transparent ${theme === "light" ? "text-slate-900" : "text-gray-100"} flex flex-col font-sans transition-all duration-500 ease-out will-change-transform ${
           isLoading 
             ? "opacity-0 pointer-events-none invisible scale-98 blur-md" 
             : "opacity-100 visible scale-100 blur-0"
@@ -109,6 +133,8 @@ export default function App() {
       <Header 
         activeSection={activeSection} 
         onScrollToSection={handleScrollToSection} 
+        theme={theme}
+        onToggleTheme={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
       />
 
       {/* 2. Panoramic Slider Intro */}
