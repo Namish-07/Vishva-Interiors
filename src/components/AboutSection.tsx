@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { COMPANY_VALUES } from "../data";
 import { Compass, Sparkles, Building2, Shield, Calendar, Users, Award, Landmark } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function AboutSection() {
   const [activeTab, setActiveTab] = useState<"heritage" | "values">("heritage");
@@ -11,7 +12,7 @@ export default function AboutSection() {
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
         {/* Section Header */}
         <div className="max-w-2xl space-y-4 mb-16 md:mb-20">
@@ -181,7 +182,7 @@ export default function AboutSection() {
           </div>
         )}
 
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

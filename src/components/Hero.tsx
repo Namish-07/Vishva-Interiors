@@ -59,7 +59,7 @@ export default function Hero({ onLearnMore, onBookConsultation }: HeroProps) {
       ))}
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-12 md:pt-24 flex flex-col lg:flex-row gap-12 lg:items-center">
+      <div className="relative z-10 max-w-full px-6 md:px-16 xl:px-24 w-full pt-12 md:pt-24 flex flex-col lg:flex-row gap-12 lg:items-center">
         {/* Left text column */}
         <div className="flex-1 space-y-6 md:space-y-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/20 text-gold-400 font-mono text-[9px] tracking-widest uppercase font-semibold">

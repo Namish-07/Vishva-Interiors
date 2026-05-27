@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
+import ScrollReveal from "./ScrollReveal";
 
 interface MaterialConfiguratorProps {
   onSendConfigToArchitect: (configSummary: string) => void;
@@ -137,7 +138,7 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
         {/* Section Header with Top-Right Switcher */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 border-b border-white/5 pb-10">
@@ -941,7 +942,7 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
           </div>
         </div>
 
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

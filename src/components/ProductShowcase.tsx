@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PRODUCT_CATEGORIES } from "../data";
 import { Sparkles, ArrowDownRight, Layers, Sliders, ChevronDown, CheckCircle2 } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 interface ProductShowcaseProps {
   onSelectCategoryFilter: (catId: string) => void;
@@ -25,7 +26,7 @@ export default function ProductShowcase({ onSelectCategoryFilter }: ProductShowc
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-600/5 rounded-full blur-3.5xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div className="space-y-4">
@@ -174,7 +175,7 @@ export default function ProductShowcase({ onSelectCategoryFilter }: ProductShowc
             </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

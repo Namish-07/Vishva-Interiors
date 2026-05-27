@@ -38,11 +38,11 @@ export default function Header({ onScrollToSection, activeSection }: HeaderProps
       id="main-header"
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out ${
         isScrolled
-          ? "bg-slate-925/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-xl"
+          ? "bg-slate-925/90 backdrop-blur-xl py-4 shadow-xl"
           : "bg-transparent py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+      <div className="max-w-full mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo and Brand */}
         <div 
           onClick={() => handleNavClick("home")}
@@ -85,9 +85,6 @@ export default function Header({ onScrollToSection, activeSection }: HeaderProps
                   }`}
                 >
                   {item.label}
-                  {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gold-400" />
-                  )}
                 </button>
               </li>
             ))}

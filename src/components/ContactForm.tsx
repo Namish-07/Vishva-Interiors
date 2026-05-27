@@ -3,6 +3,7 @@ import { ContactFormInput, Testimonial } from "../types";
 import { TESTIMONIALS, PRODUCT_CATEGORIES } from "../data";
 import { Mail, Phone, MapPin, Stars, Sparkles, Send, CheckCircle2, Clock, Calendar, HelpCircle, Compass } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
+import ScrollReveal from "./ScrollReveal";
 
 interface ContactFormProps {
   preFilledInterest?: string;
@@ -90,7 +91,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
       <div className="absolute top-1/4 left-0 w-80 h-80 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-[200px] right-[-100px] w-96 h-96 bg-purple-700/5 rounded-full blur-3.5xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
         {/* Testimonials Banner above input forms, acting as client validation */}
         <div className="mb-20 md:mb-24 space-y-6 max-w-4xl mx-auto text-center">
@@ -397,7 +398,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
 
         </div>
 
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

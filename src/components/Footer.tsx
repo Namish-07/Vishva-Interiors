@@ -14,7 +14,7 @@ export default function Footer({ onScrollToSection }: FooterProps) {
       {/* Decorative lighting */}
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gold-600/5 rounded-full blur-3.5xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
         {/* Core Quick Grids linking modules */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/5">

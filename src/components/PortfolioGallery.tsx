@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { Project, ProductCategory } from "../types";
 import { SIGNATURE_PORTFOLIO_PROJECTS, PRODUCT_CATEGORIES, GAL_IMAGES } from "../data";
 import { Search, Compass, Shield, Maximize2, X, Sparkles, MapPin, Layers, RefreshCw, Calendar, ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 interface PortfolioGalleryProps {
   initialSubCategoryId?: string;
@@ -145,7 +146,7 @@ export default function PortfolioGallery({ initialSubCategoryId, onSelectProject
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/5 rounded-full blur-3.5xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-3.5xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
         {/* Gallery Intro Block */}
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-16">
@@ -352,7 +353,7 @@ export default function PortfolioGallery({ initialSubCategoryId, onSelectProject
             </button>
           </div>
         )}
-      </div>
+      </ScrollReveal>
 
       {/* PORTFOLIO LIGHTBOX / MODAL DETAILS VIEW */}
       {activeProject && (
