@@ -2,6 +2,7 @@ import { useState } from "react";
 import { COMPANY_VALUES } from "../data";
 import { Compass, Sparkles, Building2, Shield, Calendar, Users, Award, Landmark } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import WordReveal from "./WordReveal";
 
 export default function AboutSection() {
   const [activeTab, setActiveTab] = useState<"heritage" | "values">("heritage");
@@ -20,13 +21,17 @@ export default function AboutSection() {
             <Landmark className="w-3.5 h-3.5" />
             <span>Corporate Heritage Profile</span>
           </div>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white">
-            Andhra Pradesh's <br />
-            <span className="italic font-normal text-gold-300">Legacy of Exquisite Craft</span>
-          </h2>
-          <p className="font-sans text-gray-400 text-xs md:text-sm leading-relaxed max-w-xl">
-            Established on structural transparency and uncompromising material durability. Under the leadership of Vishva Interiors, we engineer premium glass, aluminum, and metallic concepts that last.
-          </p>
+          <WordReveal 
+            as="h2"
+            text="Andhra Pradesh's Legacy of Exquisite Craft"
+            className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"
+          />
+          <WordReveal
+            as="p"
+            text="Established on structural transparency and uncompromising material durability. Under the leadership of Vishva Interiors, we engineer premium glass, aluminum, and metallic concepts that last."
+            className="font-sans text-gray-400 text-xs md:text-sm leading-relaxed max-w-xl block"
+            staggerDelay={0.01}
+          />
         </div>
 
         {/* Tab Selector buttons */}
@@ -84,15 +89,23 @@ export default function AboutSection() {
             {/* Right side: Elegant narrative and core cards */}
             <div className="lg:col-span-7 space-y-8">
               <div className="space-y-4">
-                <h3 className="font-serif text-xl md:text-2xl font-bold text-white tracking-wide">
-                  Where Handcrafted Precision Meets Heavy Structural Engineering
-                </h3>
-                <p className="font-sans text-xs md:text-sm text-gray-300 leading-relaxed">
-                  Our journey began in 2012 in the historic city of Rajahmundry, specializing in high-grade architectural glass under the brand <strong className="text-white">The Railing Point &amp; Antiques</strong>. Harnessing hands-on casting experience and rising market demand, we expanded into Visakhapatnam, consolidating our design houses into the unified elite mark of <strong className="text-gold-400">Vishva Interiors</strong>.
-                </p>
-                <p className="font-sans text-xs md:text-sm text-gray-300 leading-relaxed">
-                  Today, we deliver complex, thermally broken aluminum system windows, smart switchable glass screens, titanium PVD partitions, solid custom-cast heavy brass architectural pull handles, and deep live-edge epoxy river slabs.
-                </p>
+                <WordReveal 
+                  as="h3"
+                  text="Where Handcrafted Precision Meets Heavy Structural Engineering"
+                  className="font-serif text-xl md:text-2xl font-bold text-white tracking-wide"
+                />
+                <WordReveal
+                  as="p"
+                  text="Our journey began in 2012 in the historic city of Rajahmundry, specializing in high-grade architectural glass under the brand The Railing Point & Antiques. Harnessing hands-on casting experience and rising market demand, we expanded into Visakhapatnam, consolidating our design houses into the unified elite mark of Vishva Interiors."
+                  className="font-sans text-xs md:text-sm text-gray-300 leading-relaxed block"
+                  staggerDelay={0.007}
+                />
+                <WordReveal
+                  as="p"
+                  text="Today, we deliver complex, thermally broken aluminum system windows, smart switchable glass screens, titanium PVD partitions, solid custom-cast heavy brass architectural pull handles, and deep live-edge epoxy river slabs."
+                  className="font-sans text-xs md:text-sm text-gray-300 leading-relaxed block"
+                  staggerDelay={0.007}
+                />
               </div>
 
               {/* Timeline checkpoints */}

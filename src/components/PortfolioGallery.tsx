@@ -3,6 +3,7 @@ import { Project, ProductCategory } from "../types";
 import { SIGNATURE_PORTFOLIO_PROJECTS, PRODUCT_CATEGORIES, GAL_IMAGES } from "../data";
 import { Search, Compass, Shield, Maximize2, X, Sparkles, MapPin, Layers, RefreshCw, Calendar, ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import WordReveal from "./WordReveal";
 
 interface PortfolioGalleryProps {
   initialSubCategoryId?: string;
@@ -160,12 +161,17 @@ export default function PortfolioGallery({ initialSubCategoryId, onSelectProject
             <Compass className="w-3.5 h-3.5 animate-spin-slow" />
             <span>High-Definition Experience Center</span>
           </a>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white">
-            High-Resolution <span className="italic text-gold-300 font-normal">Project Gallery</span>
-          </h2>
-          <p className="font-sans text-gray-400 text-sm leading-relaxed">
-            Browse through our extensive directory of over 150 signature projects completed across Andhra Pradesh. Optimized for smooth lag-free navigation of premium materials.
-          </p>
+          <WordReveal 
+            as="h2"
+            text="High-Resolution Project Gallery"
+            className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight block"
+          />
+          <WordReveal
+            as="p"
+            text="Browse through our extensive directory of over 150 signature projects completed across Andhra Pradesh. Optimized for smooth lag-free navigation of premium materials."
+            className="font-sans text-gray-400 text-sm leading-relaxed block"
+            staggerDelay={0.01}
+          />
         </div>
 
         {/* CONTROLS HUB - Filter & Search */}

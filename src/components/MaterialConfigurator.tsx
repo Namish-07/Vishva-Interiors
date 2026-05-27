@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
 import ScrollReveal from "./ScrollReveal";
+import WordReveal from "./WordReveal";
 
 interface MaterialConfiguratorProps {
   onSendConfigToArchitect: (configSummary: string) => void;
@@ -147,12 +148,17 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
               <Sliders className="w-3.5 h-3.5 animate-pulse" />
               <span>Interactive Bespoke Sandbox</span>
             </div>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white">
-              Live Material &amp; Product <span className="italic font-normal text-gold-300 font-sans">Simulators</span>
-            </h2>
-            <p className="font-sans text-gray-400 text-sm leading-relaxed">
-              Synthesize your design specifications. Switch our digital sandbox to preview architectural glass layouts, motorized bioclimatic pergolas, or custom live-edge epoxy river tables in real-time.
-            </p>
+            <WordReveal 
+              as="h2"
+              text="Live Material & Product Simulators"
+              className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"
+            />
+            <WordReveal
+              as="p"
+              text="Synthesize your design specifications. Switch our digital sandbox to preview architectural glass layouts, motorized bioclimatic pergolas, or custom live-edge epoxy river tables in real-time."
+              className="font-sans text-gray-400 text-sm leading-relaxed block"
+              staggerDelay={0.01}
+            />
           </div>
           
           {/* Top Right Selector Component with padding fix to avoid icon overlap */}

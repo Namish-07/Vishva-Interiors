@@ -4,6 +4,7 @@ import { TESTIMONIALS, PRODUCT_CATEGORIES } from "../data";
 import { Mail, Phone, MapPin, Stars, Sparkles, Send, CheckCircle2, Clock, Calendar, HelpCircle, Compass } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
 import ScrollReveal from "./ScrollReveal";
+import WordReveal from "./WordReveal";
 
 interface ContactFormProps {
   preFilledInterest?: string;
@@ -139,13 +140,17 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
               <span className="font-mono text-xs text-gold-400 tracking-widest uppercase font-semibold">
                 Studio Communications
               </span>
-              <h2 className="font-serif text-3xl md:text-4.5xl font-bold tracking-tight text-white">
-                Book a Private <br />
-                <span className="italic font-normal text-gold-300">Design Consultation</span>
-              </h2>
-              <p className="font-sans text-gray-400 text-sm leading-relaxed">
-                Meet with our engineering decorators at our Visakhapatnam headquarters or schedule an on-site structural alignment review at your residence in Andhra Pradesh.
-              </p>
+              <WordReveal 
+                as="h2"
+                text="Book a Private Design Consultation"
+                className="font-serif text-3xl md:text-4.5xl font-bold tracking-tight text-white leading-tight block"
+              />
+              <WordReveal
+                as="p"
+                text="Meet with our engineering decorators at our Visakhapatnam headquarters or schedule an on-site structural alignment review at your residence in Andhra Pradesh."
+                className="font-sans text-gray-400 text-sm leading-relaxed block"
+                staggerDelay={0.01}
+              />
             </div>
 
             {/* Structured info items */}

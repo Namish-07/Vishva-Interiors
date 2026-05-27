@@ -91,6 +91,24 @@ export const COMPANY_VALUES: CompanyValue[] = [
 
 export const TESTIMONIALS: Testimonial[] = [
   {
+    id: "vittal-kumar",
+    name: "Vittal Kumar",
+    role: "Premium Homeowner",
+    company: "Google Maps Review",
+    content: "Absolutely fantastic work carried out by The Railing Point and Vishva Interiors. They installed custom glass handrails with brass heavy connectors in our residential duplex. Beautiful high-end mirror finish, on-time completion, and very professional execution!",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "mandavilli-karthikeya",
+    name: "Mandavilli Karthikeya",
+    role: "Villa Client",
+    company: "Google Maps Review",
+    content: "We got custom glass partitions and heavy-duty premium sliding window systems installed from Vishva Interiors. The material quality, response speed, and showroom presentation at Visakhapatnam were outstanding. Best upscale interior engineers in Andhra Pradesh!",
+    avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
     id: "1",
     name: "Vijay Ramaraju",
     role: "Chief Architect",
@@ -110,11 +128,65 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     id: "3",
+    name: "Satish Kumar Peddinti",
+    role: "Property Owner",
+    company: "Rajahmundry Smart Living Resorts",
+    content: "The Railing Point & Antiques is hands down the best place in East Godavari for high quality glass staircases and structural works. We completed our duplex glass handrails with brass heavy connectors. Beautiful mirror-finish and on-time completion!",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "4",
+    name: "Naidu Apparao",
+    role: "Residence Representative",
+    company: "MVP Colony Premium Villa, Visakhapatnam",
+    content: "Visited their Vizag experience yard and was fascinated by their custom epoxy resin river tables and high-grade metal partition setups. The PVD coating is flawless and extremely luxurious. Vishva Interiors has top-tier installers who did an exceptionally clean job.",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "5",
     name: "Sanjay Reddy",
     role: "Principal Designer",
     company: "Reddy Space Consultants, Rajahmundry",
     content: "The epoxy resin conference table and integrated brass inlay floors they produced for our corporate office left our clients speechless. Highly responsive, premium materials, and flawless post-sales warranty support.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "6",
+    name: "Vara Lakshmi",
+    role: "Interior Stylist",
+    company: "Bespoke Spaces Kakinada",
+    content: "Got a dynamic motorized pergola and architectural safety laminated glass facade done for our retail client. Exceptional custom engineering, leak-proof wind durability testing, and premium design assistance from Rajahmundry & Vizag hubs.",
+    avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "7",
+    name: "Venkata Prasad",
+    role: "Building Consultant",
+    company: "Srinivasa Premium Builders, Guntur",
+    content: "I strongly recommend Vishva Interiors for slim-line aluminum system profile windows and sliding glass assemblies. Truly superb extrusion quality, noise proof glazing, and exceptionally smooth rollers that glide effortless with finger touch.",
+    avatar: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "8",
+    name: "K. Srinivasa Rao",
+    role: "Senior Project Engineer",
+    company: "AP Infrastructure Works, Guntur",
+    content: "Have been a regular buyer from 'The Railing Point & Antiques' since their initial decade. Their expansion into custom cast heavy brass and metal cladding under Vishva Interiors is a huge plus for builders in Andhra Pradesh demanding international structural glass standards.",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+    rating: 5
+  },
+  {
+    id: "9",
+    name: "Geetha Chowdary",
+    role: "Villa Client",
+    company: "Madhurawada Sea View Residency",
+    content: "Absolutely amazing experience with their complete frameless glass balcony railings & profile sliding panels. Vishva Interiors has a dedicated site support team that provides instant assistance and respects structural standards perfectly. Highly recommended!",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
     rating: 5
   }
 ];

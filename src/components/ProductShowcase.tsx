@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PRODUCT_CATEGORIES } from "../data";
 import { Sparkles, ArrowDownRight, Layers, Sliders, ChevronDown, CheckCircle2 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import WordReveal from "./WordReveal";
 
 interface ProductShowcaseProps {
   onSelectCategoryFilter: (catId: string) => void;
@@ -34,14 +35,18 @@ export default function ProductShowcase({ onSelectCategoryFilter }: ProductShowc
               <ChevronDown className="w-5 h-5 text-gold-500 transform -rotate-90" />
               <span className="font-mono text-xs text-gold-400 tracking-widest uppercase font-medium">Bespoke Architectural Range</span>
             </div>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-              Materials &amp; Engineering <br />
-              <span className="font-normal italic text-gold-300">Detailed Services</span>
-            </h2>
+            <WordReveal 
+              as="h2"
+              text="Materials & Engineering Detailed Services"
+              className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"
+            />
           </div>
-          <p className="font-sans text-gray-400 text-sm md:text-base leading-relaxed max-w-md">
-            Our specialized production yards in Visakhapatnam handle materials with micro-precision. Select a category below to explore technical drawings, sub-ranges, and live installations.
-          </p>
+          <WordReveal
+            as="p"
+            text="Our specialized production yards in Visakhapatnam handle materials with micro-precision. Select a category below to explore technical drawings, sub-ranges, and live installations."
+            className="font-sans text-gray-400 text-sm md:text-base leading-relaxed max-w-md block"
+            staggerDelay={0.01}
+          />
         </div>
 
         {/* Category Toggles Slider */}
