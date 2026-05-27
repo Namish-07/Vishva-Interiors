@@ -121,16 +121,8 @@ export default function AboutSection() {
                 <div className="flex gap-4">
                   <span className="font-serif text-gold-400 font-bold text-lg md:text-xl shrink-0 mt-0.5">2022</span>
                   <div className="space-y-1">
-                    <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wide">Brand Unification</h5>
-                    <span className="block font-sans text-xs text-gray-400">Consolidated under Vishva Interiors in Visakhapatnam. Introduced aluminum casing and luxury PVD systems.</span>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <span className="font-serif text-gold-400 font-bold text-lg md:text-xl shrink-0 mt-0.5">2026</span>
-                  <div className="space-y-1">
-                    <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wide">Luxury Dominance</h5>
-                    <span className="block font-sans text-xs text-gray-400">Andhra Pradesh's preferred architecture partner, providing full-warranty, high-definition interior ecosystems.</span>
+                    <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wide">Brand Unification &amp; Luxury Dominance</h5>
+                    <span className="block font-sans text-xs text-gray-400">Consolidated under Vishva Interiors in Visakhapatnam. Introduced aluminum casing and luxury PVD systems, serving as Andhra Pradesh's preferred architecture partner.</span>
                   </div>
                 </div>
               </div>

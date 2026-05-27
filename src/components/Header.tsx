@@ -55,24 +55,63 @@ export default function Header({
           onClick={() => handleNavClick("home")}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <a 
-            href="https://maps.app.goo.gl/6EDexhSqfoHztf4X9"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            title="View Store Location on Google Maps"
-            className="relative w-10 h-10 rounded-lg bg-gradient-to-tr from-gold-600 to-gold-400 p-[1px] flex items-center justify-center transition-transform duration-500 hover:rotate-12"
+          <div 
+            title="Vishva Interiors Logo"
+            className="relative w-12 h-10 select-none transition-transform duration-300 hover:scale-110 flex items-center justify-center bg-transparent"
           >
-            <div className="w-full h-full rounded-lg bg-slate-950 flex items-center justify-center">
-              <Compass className="w-5 h-5 text-gold-400 animate-spin-slow" />
-            </div>
-          </a>
+            <svg 
+              viewBox="0 0 100 80" 
+              className="w-full h-full text-white"
+              fill="currentColor"
+              aria-label="Vishva Logo"
+            >
+              <defs>
+                <linearGradient id="logo-fade-right" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+                  <stop offset="30%" stopColor="currentColor" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
+                </linearGradient>
+                <linearGradient id="logo-fade-left" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+                  <stop offset="70%" stopColor="currentColor" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              {/* Top Bar (shifted right, fades from left to right) */}
+              <rect 
+                x="22" 
+                y="12" 
+                width="73" 
+                height="14" 
+                rx="1"
+                fill="url(#logo-fade-right)" 
+              />
+              {/* Middle Bar (shifted left, fades from right to left) */}
+              <rect 
+                x="5" 
+                y="33" 
+                width="73" 
+                height="14" 
+                rx="1"
+                fill="url(#logo-fade-left)" 
+              />
+              {/* Bottom Bar (shifted right, fades from left to right) */}
+              <rect 
+                x="22" 
+                y="54" 
+                width="73" 
+                height="14" 
+                rx="1"
+                fill="url(#logo-fade-right)" 
+              />
+            </svg>
+          </div>
           <div className="flex flex-col">
             <span className="font-serif text-lg font-bold tracking-widest text-white uppercase group-hover:text-gold-400 transition-colors">
               Vishva
             </span>
-            <span className="font-mono text-[9px] tracking-[0.35em] text-gold-500 uppercase font-light">
-              Interiors
+            <span className="font-mono text-[8px] tracking-[0.2em] text-gold-500 uppercase font-light">
+              Interiors & Antiques
             </span>
           </div>
         </div>
@@ -102,7 +141,7 @@ export default function Header({
           {/* Quick contact trigger */}
           <button
             type="button"
-            onClick={() => handleNavClick("contact")}
+            onClick={() => handleNavClick("consultation-form")}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-500/10 hover:bg-gold-500 border border-gold-400/20 hover:border-gold-400/50 text-gold-300 hover:text-white font-sans text-[10px] tracking-widest uppercase font-semibold transition-all duration-300 shadow-md hover:shadow-gold-500/20"
           >
             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
@@ -144,7 +183,7 @@ export default function Header({
           )}
           <button
             type="button"
-            onClick={() => handleNavClick("contact")}
+            onClick={() => handleNavClick("consultation-form")}
             className="px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-400/20 text-gold-400 font-sans text-[9px] tracking-widest uppercase font-medium"
           >
             Consult

@@ -41,8 +41,8 @@ export default function Footer({ onScrollToSection }: FooterProps) {
                 <span className="font-serif text-lg font-bold tracking-widest text-white uppercase">
                   Vishva
                 </span>
-                <span className="font-mono text-[9px] tracking-[0.35em] text-gold-500 uppercase font-light">
-                  Interiors
+                <span className="font-mono text-[8px] tracking-[0.2em] text-gold-500 uppercase font-light">
+                  Interiors & Antiques
                 </span>
               </div>
             </div>
@@ -53,7 +53,7 @@ export default function Footer({ onScrollToSection }: FooterProps) {
 
             <div className="flex items-center gap-3.5 text-xs font-mono text-gray-500 uppercase">
               <Landmark className="w-4 h-4 text-gold-500" />
-              <span>ESTD 2012 • VISAKHAPATNAM HQ</span>
+              <span>ESTD 2012 • VISAKHAPATNAM OFFICE</span>
             </div>
           </div>
 

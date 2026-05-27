@@ -11,7 +11,9 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       { id: "system-windows", name: "Aluminum System Windows", description: "Premium soundproof and thermal-insulated sliding & casement windows with sleek profiles." },
       { id: "sleek-partitions", name: "Aluminum Sleek Partitions", description: "Ultra-slim internal divider systems providing structural soundness with absolute acoustic control." },
       { id: "switchable-film", name: "Switchable Glass Film", description: "Smart electrochromic film transitioning from absolute frosted opacity to perfect optical clarity on demand." },
-      { id: "laminated-glass", name: "Fabric Laminated Glass", description: "Exquisite custom fabrics sealed within double layers of tempered architectural glass." }
+      { id: "laminated-glass", name: "Fabric Laminated Glass", description: "Exquisite custom fabrics sealed within double layers of tempered architectural glass." },
+      { id: "shower-enclosures", name: "Luxury Shower Enclosures", description: "Frameless micro-profile glass shower partitions featuring water-repellent nano-coatings and solid PVD brass hinge systems." },
+      { id: "led-mirrors", name: "Aura LED Smart Mirrors", description: "Luminous de-misting vanity mirrors with custom sandblasted bands, touch sensors, and responsive ambient lighting." }
     ]
   },
   {
@@ -46,7 +48,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     subcategories: [
       { id: "brass-idols", name: "Brass Idols", description: "Masterfully hand-sculpted temple and home-shrine deities reflecting classical Indian artistic heritage." },
       { id: "brass-fixtures", name: "Brass Fixtures & Motifs", description: "Custom cabinet pulls, architectural pivot door handles, and gorgeous wall studs cast in pure brass." },
-      { id: "brass-inlay", name: "Brass Inlay Products", description: "Intricate solid brass geometric inserts polished flush into premium hardwood or marble floor slabs." }
+      { id: "brass-inlay", name: "Brass Inlay Products", description: "Intricate solid brass geometric inserts polished flush into premium hardwood or marble floor slabs." },
+      { id: "brass-handles", name: "Bespoke Brass Pull Handles", description: "Solid gravity-cast solid dharapatnam brass entrance hardware hand-patinated to customized antique finishes." }
     ]
   },
   {
@@ -306,10 +309,11 @@ const MATERIALS_POOL: Record<string, string[]> = {
   resin: ["Ultra-Clear Casting Resin", "Solid Burled Walnut", "Exotic Live-Edge Teak Base", "Heat Resistant Liquid Epoxies", "Micro-Pearl Metallic Powders"]
 };
 
-// Generates 150 project portfolio items to represent the "hundreds of them" requirement smoothly.
+// Generates exactly 154 project portfolio items to represent the "hundreds of them" requirement smoothly.
 export function generateProjects(): Project[] {
   const projects: Project[] = [];
   let projId = 1;
+  let subcatIndex = 0;
 
   // Let's create high quality curated seed lists based on the subcategories
   PRODUCT_CATEGORIES.forEach((cat) => {
@@ -317,8 +321,9 @@ export function generateProjects(): Project[] {
       const parentCatId = cat.id;
       const subcatId = subcat.id;
 
-      // Create 6-8 projects per subcategory to reach around 150 total highly distinctive projects
-      const projectCount = 7;
+      // Create exactly 154 total projects (7 subcategories get 8, 14 subcategories get 7; 7 * 8 + 14 * 7 = 154)
+      const projectCount = subcatIndex < 7 ? 8 : 7;
+      subcatIndex++;
       for (let index = 1; index <= projectCount; index++) {
         const idStr = `proj-${projId}`;
         const loc = ANDHRA_PRADESH_LOCATIONS[(projId + index) % ANDHRA_PRADESH_LOCATIONS.length];
@@ -330,7 +335,7 @@ export function generateProjects(): Project[] {
         const imagesList = GAL_IMAGES[subcatId] || GAL_IMAGES["glass-railings"];
         const baseImg = imagesList[index % imagesList.length];
         // Append unique index query parameter so that browsers do not cache them onto the same image, giving a stunning varied view
-        const displayImage = `${baseImg}?auto=format&fit=crop&q=80&w=700&sig=${projId}`;
+        const displayImage = `${baseImg}?auto=format&fit=crop&q=65&w=450&sig=${projId}`;
 
         // Create elegant design name
         const designNames = [
@@ -358,7 +363,7 @@ export function generateProjects(): Project[] {
           highlights: [
             `${difficulty} approval standard`,
             `Engineered in our Visakhapatnam production facility`,
-            `Includes ${5 + (projId % 6)} year structural warranty`
+            `Includes 10-Year Full Warranty Guard`
           ],
           featured: projId % 11 === 0 // Make some projects featured
         });

@@ -149,7 +149,7 @@ export default function Hero({ onLearnMore, onBookConsultation }: HeroProps) {
 
             <div className="space-y-2">
               <span className="block font-serif text-2xl md:text-3.5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold-300 to-gold-500">
-                5-Year
+                10-Year
               </span>
               <span className="block font-sans text-[11px] text-gray-400 uppercase tracking-widest leading-snug">
                 Full Warranty Guard

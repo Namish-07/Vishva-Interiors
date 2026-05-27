@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck } from "lucide-react";
+import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck, Gem, Table } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
 import ScrollReveal from "./ScrollReveal";
 import WordReveal from "./WordReveal";
@@ -141,8 +141,8 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
 
       <ScrollReveal className="max-w-full px-6 md:px-16 xl:px-24 relative z-10">
         
-        {/* Section Header with Top-Right Switcher */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 border-b border-white/5 pb-10">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-8 border-b border-white/5 pb-10">
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold-500/10 border border-gold-400/20 rounded-full font-mono text-[9px] tracking-widest text-gold-400 uppercase">
               <Sliders className="w-3.5 h-3.5 animate-pulse" />
@@ -155,36 +155,98 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
             />
             <WordReveal
               as="p"
-              text="Synthesize your design specifications. Switch our digital sandbox to preview architectural glass layouts, motorized bioclimatic pergolas, or custom live-edge epoxy river tables in real-time."
+              text="Synthesize your design specifications. Switch our digital sandbox below to preview architectural glass layouts, motorized bioclimatic pergolas, or custom live-edge epoxy river tables in real-time."
               className="font-sans text-gray-400 text-sm leading-relaxed block"
               staggerDelay={0.01}
             />
           </div>
-          
-          {/* Top Right Selector Component with padding fix to avoid icon overlap */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-            <span className="font-mono text-[9px] tracking-widest text-gray-500 uppercase block text-left sm:text-right font-black">
-              SELECT SIM CONFIGURATION:
-            </span>
-            <div className="relative min-w-[270px]">
-              <select
-                value={selectedSim}
-                onChange={(e) => {
-                  setSelectedSim(e.target.value as any);
-                  setSubmitted(false);
-                }}
-                className="w-full bg-slate-900 border border-gold-500/30 text-white font-mono text-xs px-4 py-3.5 pr-12 rounded-xl cursor-pointer focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400 appearance-none shadow-2xl transition-all"
-                title="Select Interactive Sandbox Simulator"
-              >
-                <option value="glass">💎 Glass &amp; PVD Partition</option>
-                <option value="pergola">⛅ Bioclimatic Motorized Pergola</option>
-                <option value="resintable">🌳 Live-Edge Resin River Table</option>
-              </select>
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gold-400">
-                <Compass className="w-4 h-4 animate-spin-slow inline" />
-              </div>
+        </div>
+
+        {/* 3 Selectable Inline Blocks */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+          {/* Block 1 */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedSim("glass");
+              setSubmitted(false);
+            }}
+            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+              selectedSim === "glass"
+                ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
+                : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
+            }`}
+          >
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+              selectedSim === "glass" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
+            }`}>
+              <Gem className="w-6 h-6 animate-pulse" />
             </div>
-          </div>
+            <div className="space-y-1">
+              <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "glass" ? "text-gold-300" : "text-white"}`}>
+                Glass &amp; PVD Partition
+              </h4>
+              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
+                Sleek frames &amp; high-end smart glass configurations.
+              </p>
+            </div>
+          </button>
+
+          {/* Block 2 */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedSim("pergola");
+              setSubmitted(false);
+            }}
+            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+              selectedSim === "pergola"
+                ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
+                : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
+            }`}
+          >
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+              selectedSim === "pergola" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
+            }`}>
+              <Sun className="w-6 h-6 group-hover:rotate-45 transition-transform duration-550" />
+            </div>
+            <div className="space-y-1">
+              <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "pergola" ? "text-gold-300" : "text-white"}`}>
+                Bioclimatic Pergola
+              </h4>
+              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
+                Motorized climates &amp; ambient beam lighting layouts.
+              </p>
+            </div>
+          </button>
+
+          {/* Block 3 */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedSim("resintable");
+              setSubmitted(false);
+            }}
+            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+              selectedSim === "resintable"
+                ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
+                : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
+            }`}
+          >
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+              selectedSim === "resintable" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
+            }`}>
+              <Table className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "resintable" ? "text-gold-300" : "text-white"}`}>
+                Resin River Table
+              </h4>
+              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
+                Exotic live-edge timber deep resin pouring preview.
+              </p>
+            </div>
+          </button>
         </div>
 
         {/* Dynamic Studio Body GRID */}

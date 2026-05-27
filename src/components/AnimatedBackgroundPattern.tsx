@@ -1,45 +1,8 @@
-import { useScroll, useTransform, useSpring, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useRef } from "react";
 
 export default function AnimatedBackgroundPattern() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Track continuous pixel scroll details down the entire page height
-  const { scrollY } = useScroll();
-
-  // Create ultra-responsive but buttery smooth spring values for high-response scrolls
-  const smoothScrollY = useSpring(scrollY, {
-    stiffness: 55,
-    damping: 24,
-    restDelta: 0.01
-  });
-
-  // --- 1. VISHVA GLASS_01 Curves (Fluid continuous 3D rotation with scroll changes) ---
-  const glass_RotateX = useTransform(smoothScrollY, (v) => 25 + v * 0.09);
-  const glass_RotateY = useTransform(smoothScrollY, (v) => 40 + v * 0.11);
-  const glass_RotateZ = useTransform(smoothScrollY, (v) => v * 0.04);
-  const glass_Y = useTransform(smoothScrollY, (v) => v * -0.04); // subtle local drift
-
-  // --- 2. VISHVA PVD_02 Curves ---
-  const pvd_RotateX = useTransform(smoothScrollY, (v) => -15 + v * -0.08);
-  const pvd_RotateY = useTransform(smoothScrollY, (v) => 35 + v * 0.12);
-  const pvd_RotateZ = useTransform(smoothScrollY, (v) => v * -0.03);
-  const pvd_X = useTransform(smoothScrollY, (v) => (v - 1200) * 0.03);
-
-  // --- 3. VISHVA FACADE_03 Curves ---
-  const facade_RotateX = useTransform(smoothScrollY, (v) => 40 + v * 0.07);
-  const facade_RotateY = useTransform(smoothScrollY, (v) => -30 + v * -0.1);
-  const facade_Y = useTransform(smoothScrollY, (v) => (v - 2400) * -0.03);
-
-  // --- 4. VISHVA BRASS_04 Curves ---
-  const brass_RotateX = useTransform(smoothScrollY, (v) => v * 0.13);
-  const brass_RotateY = useTransform(smoothScrollY, (v) => 20 + v * 0.08);
-  const brass_X = useTransform(smoothScrollY, (v) => (v - 3800) * -0.04);
-
-  // --- 5. VISHVA EPOXY_05 Curves ---
-  const epoxy_RotateX = useTransform(smoothScrollY, (v) => 30 + v * -0.11);
-  const epoxy_RotateY = useTransform(smoothScrollY, (v) => -15 + v * 0.13);
-  const epoxy_Z = useTransform(smoothScrollY, (v) => (v - 5000) * 0.05);
 
   return (
     <div
@@ -56,12 +19,18 @@ export default function AnimatedBackgroundPattern() {
       >
         <motion.div
           className="w-full h-full"
+          animate={{
+            rotateX: [25, 385],
+            rotateY: [40, 400],
+            rotateZ: [0, 360],
+          }}
+          transition={{
+            duration: 55,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           style={{
             transformStyle: "preserve-3d",
-            rotateX: glass_RotateX,
-            rotateY: glass_RotateY,
-            rotateZ: glass_RotateZ,
-            y: glass_Y,
           }}
         >
           {/* Glassmorphic 3D Double-Layer Laminated Architectural Joint Box */}
@@ -114,12 +83,18 @@ export default function AnimatedBackgroundPattern() {
       >
         <motion.div
           className="w-full h-full"
+          animate={{
+            rotateX: [-15, -375],
+            rotateY: [35, 395],
+            rotateZ: [0, -360],
+          }}
+          transition={{
+            duration: 65,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           style={{
             transformStyle: "preserve-3d",
-            rotateX: pvd_RotateX,
-            rotateY: pvd_RotateY,
-            rotateZ: pvd_RotateZ,
-            x: pvd_X,
           }}
         >
           {/* Hexagonal Laser-Cut Vacuum Gold-Plated PVD Screen segment */}
@@ -158,11 +133,17 @@ export default function AnimatedBackgroundPattern() {
       >
         <motion.div
           className="w-full h-full"
+          animate={{
+            rotateX: [35, 395],
+            rotateY: [-30, -390],
+          }}
+          transition={{
+            duration: 60,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           style={{
             transformStyle: "preserve-3d",
-            rotateX: facade_RotateX,
-            rotateY: facade_RotateY,
-            y: facade_Y,
           }}
         >
           {/* Isometric Aluminum Façade Struts and Intersecting support columns */}
@@ -221,11 +202,17 @@ export default function AnimatedBackgroundPattern() {
       >
         <motion.div
           className="w-full h-full"
+          animate={{
+            rotateX: [15, 375],
+            rotateY: [25, 385],
+          }}
+          transition={{
+            duration: 70,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           style={{
             transformStyle: "preserve-3d",
-            rotateX: brass_RotateX,
-            rotateY: brass_RotateY,
-            x: brass_X,
           }}
         >
           {/* Detailed multi-tiered solid brass layout representation */}
@@ -260,11 +247,18 @@ export default function AnimatedBackgroundPattern() {
       >
         <motion.div
           className="w-full h-full"
+          animate={{
+            rotateX: [30, 390],
+            rotateY: [-20, -380],
+            rotateZ: [10, 370],
+          }}
+          transition={{
+            duration: 75,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           style={{
             transformStyle: "preserve-3d",
-            rotateX: epoxy_RotateX,
-            rotateY: epoxy_RotateY,
-            rotateZ: epoxy_Z,
           }}
         >
           {/* Dynamic flowing resin epoxy slabs styled with wood live-edge configurations */}
@@ -298,18 +292,15 @@ export default function AnimatedBackgroundPattern() {
         </motion.div>
       </div>
 
-      {/* ================= BACKGROUND GLOWS INTERCONNECTING SCROLL CHANGES ================= */}
-      <motion.div 
+      {/* ================= BACKGROUND GLOWS ================= */}
+      <div 
         className="absolute top-[80vh] left-1/4 w-[500px] h-[500px] rounded-full bg-gold-400/[0.04] blur-3.5xl pointer-events-none"
-        style={{ y: useTransform(smoothScrollY, (value) => value * -0.06) }}
       />
-      <motion.div 
+      <div 
         className="absolute top-[280vh] right-1/4 w-[600px] h-[600px] rounded-full bg-purple-500/[0.035] blur-3.5xl pointer-events-none"
-        style={{ y: useTransform(smoothScrollY, (value) => value * 0.05) }}
       />
-      <motion.div 
+      <div 
         className="absolute top-[450vh] left-1/3 w-[550px] h-[550px] rounded-full bg-sky-500/[0.03] blur-3.5xl pointer-events-none"
-        style={{ y: useTransform(smoothScrollY, (value) => value * -0.04) }}
       />
     </div>
   );

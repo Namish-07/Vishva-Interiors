@@ -43,9 +43,23 @@ export default function App() {
   }, [theme]);
 
   const handleScrollToSection = (sectionId: string) => {
-    const targetElement = document.getElementById(sectionId);
+    const targetId = sectionId === "contact" ? "consultation-form" : sectionId;
+    const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+      let headerOffset = 100;
+      if (sectionId === "home") {
+        headerOffset = 0;
+      } else if (sectionId === "portfolio") {
+        headerOffset = 140; // Roomy offset to see the portfolio title and top selections clearly
+      } else if (sectionId === "consultation-form" || sectionId === "contact") {
+        headerOffset = 135; // Roomy headroom to view the form header perfectly
+      }
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
       setActiveSection(sectionId);
     }
   };
@@ -53,10 +67,19 @@ export default function App() {
   // Connects Product Showcase to Portfolio Gallery Filter
   const handleSelectCategoryFilter = (subCatId: string) => {
     setGalleryFilterId(subCatId);
-    const portfolioElem = document.getElementById("portfolio");
-    if (portfolioElem) {
-      portfolioElem.scrollIntoView({ behavior: "smooth" });
-    }
+    // Use timeout to let DOM re-render the filtered layout before scrolling
+    setTimeout(() => {
+      const portfolioElem = document.getElementById("portfolio-filters");
+      if (portfolioElem) {
+        const headerOffset = 110; // Plentiful offset to see the sub-systems filters clearly under the header bar
+        const elementPosition = portfolioElem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 120);
   };
 
   // Connects Portfolio Lightbox Enquiry to Contact Form Pre-fill
@@ -65,10 +88,18 @@ export default function App() {
     setPreFilledMessage(
       `Hi! I am extremely interested in the following signature project design: "${projectTitle}". Please provide raw materials compliance details, custom dimension sizing options, and an estimated quotation sheet for a similar setup.`
     );
-    const contactElem = document.getElementById("contact");
-    if (contactElem) {
-      contactElem.scrollIntoView({ behavior: "smooth" });
-    }
+    setTimeout(() => {
+      const contactElem = document.getElementById("consultation-form");
+      if (contactElem) {
+        const headerOffset = 135; // Roomy headroom so header is fully visible below the sticky bar
+        const elementPosition = contactElem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100);
   };
 
   // Connects Interactive Sandbox Configurator specs to Contact Form Pre-fill
@@ -77,10 +108,18 @@ export default function App() {
     setPreFilledMessage(
       `Greetings! I have experimented with your Interactive Studio Configurator and compiled a desired specification package:\n\n${configSummary}\n\nPlease let me know if an on-site consultation in Andhra Pradesh can be scheduled to draft these combinations.`
     );
-    const contactElem = document.getElementById("contact");
-    if (contactElem) {
-      contactElem.scrollIntoView({ behavior: "smooth" });
-    }
+    setTimeout(() => {
+      const contactElem = document.getElementById("consultation-form");
+      if (contactElem) {
+        const headerOffset = 135; // Roomy headroom to showcase the booking details cleanly
+        const elementPosition = contactElem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100);
   };
 
   // Intersection Observer to update active navigation tabs dynamically based on scroll focus
@@ -120,10 +159,10 @@ export default function App() {
       </AnimatePresence>
 
       <div 
-        className={`relative min-h-screen bg-transparent ${theme === "light" ? "text-slate-900" : "text-gray-100"} flex flex-col font-sans transition-all duration-500 ease-out will-change-transform ${
+        className={`relative min-h-screen bg-transparent ${theme === "light" ? "text-slate-900" : "text-gray-100"} flex flex-col font-sans transition-all duration-500 ease-out ${
           isLoading 
-            ? "opacity-0 pointer-events-none invisible scale-98 blur-md" 
-            : "opacity-100 visible scale-100 blur-0"
+            ? "opacity-0 pointer-events-none invisible scale-98 blur-md will-change-transform" 
+            : "opacity-100 visible blur-0"
         }`}
       >
         {/* Animated Architectural & Geometric Scrolling Background */}
@@ -140,7 +179,7 @@ export default function App() {
       {/* 2. Panoramic Slider Intro */}
       <Hero 
         onLearnMore={() => handleScrollToSection("services")} 
-        onBookConsultation={() => handleScrollToSection("contact")} 
+        onBookConsultation={() => handleScrollToSection("consultation-form")} 
       />
 
       {/* 3. Detailed Services Accordions */}

@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { ContactFormInput, Testimonial } from "../types";
 import { TESTIMONIALS, PRODUCT_CATEGORIES } from "../data";
-import { Mail, Phone, MapPin, Stars, Sparkles, Send, CheckCircle2, Clock, Calendar, HelpCircle, Compass } from "lucide-react";
+import { Mail, Phone, MapPin, Stars, Sparkles, Send, CheckCircle2, Clock, Calendar, HelpCircle, Compass, ChevronLeft, ChevronRight } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
 import ScrollReveal from "./ScrollReveal";
 import WordReveal from "./WordReveal";
@@ -86,6 +86,14 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
     return () => clearInterval(timer);
   }, []);
 
+  const handlePrevTestimonial = () => {
+    setActiveTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  const handleNextTestimonial = () => {
+    setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+  };
+
   return (
     <section id="contact" className="relative w-full py-24 md:py-32 bg-transparent border-t border-white/5 overflow-hidden">
       {/* Visual background lights */}
@@ -115,24 +123,46 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
             </span>
           </div>
 
-          {/* Rotator selector dots */}
-          <div className="flex justify-center items-center gap-2 pt-2">
-            {TESTIMONIALS.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setActiveTestimonial(idx)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === activeTestimonial ? "w-6 bg-gold-400" : "bg-white/20 hover:bg-white/40"
-                }`}
-                aria-label={`Show testimonial ${idx + 1}`}
-              />
-            ))}
+          {/* Rotator selector dots with navigation arrows */}
+          <div className="flex justify-center items-center gap-4 pt-2">
+            <button
+              type="button"
+              onClick={handlePrevTestimonial}
+              className="p-1.5 rounded-full border border-white/5 hover:border-gold-400/40 bg-white/5 text-gray-400 hover:text-white hover:scale-105 active:scale-95 transition-all"
+              title="Previous testimonial"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-3.5 h-3.5 text-gold-400" />
+            </button>
+
+            <div className="flex justify-center items-center gap-1.5">
+              {TESTIMONIALS.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setActiveTestimonial(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === activeTestimonial ? "w-6 bg-gold-400" : "bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Show testimonial ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNextTestimonial}
+              className="p-1.5 rounded-full border border-white/5 hover:border-gold-400/40 bg-white/5 text-gray-400 hover:text-white hover:scale-105 active:scale-95 transition-all"
+              title="Next testimonial"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-3.5 h-3.5 text-gold-400" />
+            </button>
           </div>
         </div>
 
         {/* The Hub Main GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pt-12 border-t border-white/5">
+        <div id="consultation-form" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pt-12 border-t border-white/5">
           
           {/* LEFT SIDE: HQ & Branch Office Coordinates */}
           <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
@@ -147,7 +177,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
               />
               <WordReveal
                 as="p"
-                text="Meet with our engineering decorators at our Visakhapatnam headquarters or schedule an on-site structural alignment review at your residence in Andhra Pradesh."
+                text="Meet with our engineering decorators at our Visakhapatnam office or schedule an on-site structural alignment review at your residence in Andhra Pradesh."
                 className="font-sans text-gray-400 text-sm leading-relaxed block"
                 staggerDelay={0.01}
               />
@@ -168,7 +198,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
                 </a>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wider">Visakhapatnam Headquarters</h5>
+                    <h5 className="font-sans font-bold text-white text-xs md:text-sm uppercase tracking-wider">Visakhapatnam Office</h5>
                     <a
                       href="https://maps.app.goo.gl/6EDexhSqfoHztf4X9"
                       target="_blank"
@@ -179,7 +209,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
                     </a>
                   </div>
                   <span className="block font-sans text-xs text-gray-400 leading-relaxed">
-                    Sector 4, Sector 5, MVP Colony, Visakhapatnam, Andhra Pradesh 530017
+                    D.No: 1-83-21/1/1, 2nd Floor, Beside TTD Kalyana Mandapam MVP Double Road, Visakhapatnam - 530017
                   </span>
                 </div>
               </div>
