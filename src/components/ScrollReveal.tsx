@@ -12,19 +12,19 @@ interface ScrollRevealProps {
 export default function ScrollReveal({
   children,
   delay = 0,
-  duration = 0.8,
-  yOffset = 40,
+  duration = 1.1,
+  yOffset = 65,
   className = "",
 }: ScrollRevealProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: yOffset }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: duration,
         delay: delay,
-        ease: [0.16, 1, 0.3, 1], // Custom Apple-style ease-out bezier curve
+        ease: [0.16, 1, 0.3, 1], // Custom slow-decay ease-out curve
       }}
       className={className}
     >
