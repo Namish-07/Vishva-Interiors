@@ -1,12 +1,43 @@
 import { useState } from "react";
-import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck, Gem, Table } from "lucide-react";
+import { Sliders, Eye, Sparkles, Send, CheckCircle2, RefreshCw, Compass, Sun, CloudRain, ShieldCheck, Gem, Table, Power, Zap } from "lucide-react";
 import InteractivePhone from "./InteractivePhone";
 import ScrollReveal from "./ScrollReveal";
 import WordReveal from "./WordReveal";
 
 interface MaterialConfiguratorProps {
-  onSendConfigToArchitect: (configSummary: string) => void;
+  onSendConfigToArchitect: (configSummary: string, categoryId?: string) => void;
 }
+
+// SIMULATOR 4: SMART MIRROR CONFIGS
+const MIRROR_SHAPES = [
+  { id: "arch", name: "Organic Vault Arch", radiusClass: "rounded-t-full h-80 w-52", desc: "Arched luxury profile reminiscent of high-end boutique hotel suites." },
+  { id: "pill", name: "Capsule Sleek Pill", radiusClass: "rounded-full h-80 w-44", desc: "Elongated soft-oval structure designed to elevate vanity coordinates." },
+  { id: "orb", name: "Celestial Pure Orb", radiusClass: "rounded-full h-64 w-64", desc: "Perfect symmetric round vanity mirror framing architectural spaces cleanly." }
+];
+
+const MIRROR_LIGHTS = [
+  { id: "candles", name: "Candlelight Golden Glow (2200K)", hex: "#f59e0b", glow: "0 0 40px rgba(245, 158, 11, 0.5)" },
+  { id: "daylight", name: "Daylight Pure Alabaster (4000K)", hex: "#e2e8f0", glow: "0 0 40px rgba(226, 232, 240, 0.45)" },
+  { id: "cosmic", name: "Cosmic Lavender Bloom (RGB)", hex: "#c084fc", glow: "0 0 45px rgba(192, 132, 252, 0.55)" }
+];
+
+const MIRROR_SERVICES = [
+  { id: "frosted", name: "Framed Frosted Sandblast Halo", desc: "Includes a 2cm precision sandblasted border band that diffuses the LED backlight forward." },
+  { id: "clean", name: "Seamless Edge Optical Aura", desc: "Features a clean non-beveled mirror edge allowing the backlit aura to paint the host wall softly." }
+];
+
+// SIMULATOR 5: ALUMINUM ULTRA-SLIM SYSTEM WINDOW CONFIGS
+const WINDOW_FRAMES = [
+  { id: "charcoal", name: "Anodized Slate Charcoal", colorCode: "#272a2e", desc: "Heavy-duty coastal anodization protecting against saline air corrosion." },
+  { id: "champagne", name: "PVD Champagne Gold Luxury", colorCode: "#b1843b", desc: "Exquisite PVD vapor deposition, adding a reflective gold metallic sheen to visual profiles." },
+  { id: "black", name: "Executive Jet Black Matte", colorCode: "#111317", desc: "Ultra-sleek modern architectural profile matching dark minimalist interiors." }
+];
+
+const WINDOW_GLASSES = [
+  { id: "double", name: "Argon SoundProof Double-Glazed", color: "rgba(224, 242, 254, 0.3)", opacity: 0.3, border: "rgba(14, 165, 233, 0.5)", desc: "19mm structural glazing filled with sound-stopping dense argon gas, reducing outside noise by 45dB." },
+  { id: "ocean", name: "Ocean Reflective Solar Blue", color: "rgba(59, 130, 246, 0.45)", opacity: 0.5, border: "rgba(29, 78, 216, 0.7)", desc: "High-performance smart solar-coating that completely blocks solar heat gain while preserving beach vistas." },
+  { id: "frosted", name: "Translucent Satin Acid-Etched", color: "rgba(248, 250, 252, 0.8)", opacity: 0.85, border: "rgba(255, 255, 255, 0.95)", desc: "Satin finish privacy pane that allows ambient light passage with complete silhouette shielding." }
+];
 
 // SIMULATOR 1: GLASS CONFIGS
 const GLASS_STYLES = [
@@ -71,7 +102,7 @@ const TABLE_BASES = [
 
 export default function MaterialConfigurator({ onSendConfigToArchitect }: MaterialConfiguratorProps) {
   // Top level state to toggle simulators
-  const [selectedSim, setSelectedSim] = useState<"glass" | "pergola" | "resintable">("glass");
+  const [selectedSim, setSelectedSim] = useState<"glass" | "pergola" | "resintable" | "smartmirror" | "systemwindow">("glass");
 
   // State 1: Glass simulator fields
   const [glass, setGlass] = useState(GLASS_STYLES[0]);
@@ -89,6 +120,17 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
   const [tableResin, setTableResin] = useState(TABLE_RESINS[0]);
   const [tableBase, setTableBase] = useState(TABLE_BASES[1]); // Default starburst
 
+  // State 4: Smart mirror fields
+  const [mirrorShape, setMirrorShape] = useState(MIRROR_SHAPES[0]);
+  const [mirrorLight, setMirrorLight] = useState(MIRROR_LIGHTS[0]);
+  const [mirrorService, setMirrorService] = useState(MIRROR_SERVICES[0]);
+  const [mirrorPower, setMirrorPower] = useState(true);
+
+  // State 5: Aluminum System Window fields
+  const [windowFrame, setWindowFrame] = useState(WINDOW_FRAMES[0]);
+  const [windowGlass, setWindowGlass] = useState(WINDOW_GLASSES[0]);
+  const [windowSlide, setWindowSlide] = useState(30); // Default 30% open
+
   const [submitted, setSubmitted] = useState(false);
 
   const resetStudio = () => {
@@ -101,25 +143,44 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
       setPergolaLouver(PERGOLA_LOUVERS[1]);
       setPergolaLight(PERGOLA_LIGHTS[1]);
       setPergolaWeather("sun");
-    } else {
+    } else if (selectedSim === "resintable") {
       setTableWood(TABLE_WOODS[0]);
       setTableResin(TABLE_RESINS[0]);
       setTableBase(TABLE_BASES[1]);
+    } else if (selectedSim === "smartmirror") {
+      setMirrorShape(MIRROR_SHAPES[0]);
+      setMirrorLight(MIRROR_LIGHTS[0]);
+      setMirrorService(MIRROR_SERVICES[0]);
+      setMirrorPower(true);
+    } else if (selectedSim === "systemwindow") {
+      setWindowFrame(WINDOW_FRAMES[0]);
+      setWindowGlass(WINDOW_GLASSES[0]);
+      setWindowSlide(30);
     }
     setSubmitted(false);
   };
 
   const handleSendConfig = () => {
     let configString = "";
+    let catId = "glass";
     if (selectedSim === "glass") {
       configString = `Glass Spec Package:\n- Category: Premium Glass & PVD Partition\n- Glass Pane: ${glass.name}\n- Framing Metal: ${frame.name}\n- Light Scheme: ${light.name}`;
+      catId = "glass";
     } else if (selectedSim === "pergola") {
       configString = `Pergola Spec Package:\n- Category: Bioclimatic Motorized Pergola\n- Frame Finish: ${pergolaFrame.name}\n- Slat Rotation: ${pergolaLouver.name}\n- LED Lumens: ${pergolaLight.name}`;
-    } else {
+      catId = "aluminum";
+    } else if (selectedSim === "resintable") {
       configString = `River Table Spec Package:\n- Category: Live-Edge Resin River Table\n- Timber Wood: ${tableWood.name}\n- River Resin: ${tableResin.name}\n- Ground Base: ${tableBase.name}`;
+      catId = "resin";
+    } else if (selectedSim === "smartmirror") {
+      configString = `Smart Mirror Spec Package:\n- Category: Aura LED Smart Mirror\n- Shape: ${mirrorShape.name}\n- Light Color: ${mirrorLight.name}\n- Sandblast Option: ${mirrorService.name}`;
+      catId = "glass";
+    } else {
+      configString = `System Window Spec Package:\n- Category: Aluminum Slim System Window\n- Frame Finish: ${windowFrame.name}\n- Acoustic Glass: ${windowGlass.name}\n- Custom Slide Opening: ${windowSlide}%`;
+      catId = "glass";
     }
 
-    onSendConfigToArchitect(configString);
+    onSendConfigToArchitect(configString, catId);
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -162,8 +223,8 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
           </div>
         </div>
 
-        {/* 3 Selectable Inline Blocks */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+        {/* 5 Selectable Inline Blocks */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5 mb-12">
           {/* Block 1 */}
           <button
             type="button"
@@ -171,23 +232,23 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
               setSelectedSim("glass");
               setSubmitted(false);
             }}
-            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+            className={`group text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-3.5 cursor-pointer relative overflow-hidden ${
               selectedSim === "glass"
                 ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
                 : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
             }`}
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
               selectedSim === "glass" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
             }`}>
-              <Gem className="w-6 h-6 animate-pulse" />
+              <Gem className="w-5 h-5 animate-pulse" />
             </div>
             <div className="space-y-1">
               <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "glass" ? "text-gold-300" : "text-white"}`}>
-                Glass &amp; PVD Partition
+                Glass &amp; PVD
               </h4>
-              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
-                Sleek frames &amp; high-end smart glass configurations.
+              <p className="font-sans text-[10px] text-gray-400 leading-normal font-light">
+                Frames &amp; partitions.
               </p>
             </div>
           </button>
@@ -199,23 +260,23 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
               setSelectedSim("pergola");
               setSubmitted(false);
             }}
-            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+            className={`group text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-3.5 cursor-pointer relative overflow-hidden ${
               selectedSim === "pergola"
                 ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
                 : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
             }`}
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
               selectedSim === "pergola" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
             }`}>
-              <Sun className="w-6 h-6 group-hover:rotate-45 transition-transform duration-550" />
+              <Sun className="w-5 h-5 group-hover:rotate-45 transition-transform duration-550" />
             </div>
             <div className="space-y-1">
               <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "pergola" ? "text-gold-300" : "text-white"}`}>
-                Bioclimatic Pergola
+                Pergola
               </h4>
-              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
-                Motorized climates &amp; ambient beam lighting layouts.
+              <p className="font-sans text-[10px] text-gray-400 leading-normal font-light">
+                Bioclimatic roofings.
               </p>
             </div>
           </button>
@@ -227,23 +288,79 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
               setSelectedSim("resintable");
               setSubmitted(false);
             }}
-            className={`group text-left p-6 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden ${
+            className={`group text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-3.5 cursor-pointer relative overflow-hidden ${
               selectedSim === "resintable"
                 ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
                 : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
             }`}
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
               selectedSim === "resintable" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
             }`}>
-              <Table className="w-6 h-6" />
+              <Table className="w-5 h-5" />
             </div>
             <div className="space-y-1">
               <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "resintable" ? "text-gold-300" : "text-white"}`}>
-                Resin River Table
+                Resin Table
               </h4>
-              <p className="font-sans text-xs text-gray-400 leading-normal font-light">
-                Exotic live-edge timber deep resin pouring preview.
+              <p className="font-sans text-[10px] text-gray-400 leading-normal font-light">
+                Epoxy river designs.
+              </p>
+            </div>
+          </button>
+
+          {/* Block 4 */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedSim("smartmirror");
+              setSubmitted(false);
+            }}
+            className={`group text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-3.5 cursor-pointer relative overflow-hidden ${
+              selectedSim === "smartmirror"
+                ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
+                : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
+            }`}
+          >
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+              selectedSim === "smartmirror" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
+            }`}>
+              <Zap className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "smartmirror" ? "text-gold-300" : "text-white"}`}>
+                Aura Mirror
+              </h4>
+              <p className="font-sans text-[10px] text-gray-400 leading-normal font-light">
+                Smart LED &amp; defog.
+              </p>
+            </div>
+          </button>
+
+          {/* Block 5 */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedSim("systemwindow");
+              setSubmitted(false);
+            }}
+            className={`group text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-3.5 col-span-2 lg:col-span-1 cursor-pointer relative overflow-hidden ${
+              selectedSim === "systemwindow"
+                ? "bg-gold-500/10 border-gold-400 text-white shadow-lg shadow-gold-500/5 ring-1 ring-gold-400/20"
+                : "bg-slate-900 border-white/5 hover:border-white/10 text-gray-400 hover:text-gray-200"
+            }`}
+          >
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
+              selectedSim === "systemwindow" ? "bg-gold-500 text-white border-gold-400" : "bg-slate-950 border-white/10 text-gold-400"
+            }`}>
+              <Sliders className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h4 className={`font-serif text-sm font-bold tracking-wide transition-colors ${selectedSim === "systemwindow" ? "text-gold-300" : "text-white"}`}>
+                System Sliders
+              </h4>
+              <p className="font-sans text-[10px] text-gray-400 leading-normal font-light">
+                Slim windows &amp; doors.
               </p>
             </div>
           </button>
@@ -264,6 +381,8 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
                 {selectedSim === "glass" && "SUITE: VISHVA-GLASS-PVD"}
                 {selectedSim === "pergola" && "SUITE: VISHVA-PERGOLA-BIOCLIMATIC"}
                 {selectedSim === "resintable" && "SUITE: VISHVA-EPOXY-DINING"}
+                {selectedSim === "smartmirror" && "SUITE: VISHVA-AURA-MIRROR"}
+                {selectedSim === "systemwindow" && "SUITE: VISHVA-SYSTEM-SLIDERS"}
               </span>
             </div>
 
@@ -629,6 +748,182 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
                 </div>
               )}
 
+              {/* 4. AURA LED SMART MIRROR SIMULATOR */}
+              {selectedSim === "smartmirror" && (
+                <div id="product-simulator-mirror" className="relative z-10 flex flex-col items-center justify-center p-4 transition-all duration-500">
+                  
+                  {/* Dynamic interactive Mirror Glass element */}
+                  <div 
+                    className="relative transition-all duration-700 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center border"
+                    style={{ 
+                      borderRadius: mirrorShape.id === "arch" ? "10rem 10rem 1rem 1rem" : mirrorShape.id === "pill" ? "9999px" : "9999px",
+                      width: mirrorShape.id === "arch" ? "200px" : mirrorShape.id === "pill" ? "170px" : "240px",
+                      height: mirrorShape.id === "arch" ? "320px" : mirrorShape.id === "pill" ? "320px" : "240px",
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(200,225,240,0.5) 50%, rgba(255,255,255,0.4) 100%)",
+                      borderColor: "rgba(255,255,255,0.4)",
+                      boxShadow: mirrorPower 
+                        ? `${mirrorLight.glow}, inset 0 0 15px rgba(255,255,255,0.6)` 
+                        : "inset 0 0 15px rgba(0,0,0,0.2)",
+                      transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)"
+                    }}
+                  >
+                    {/* Glowing LED backlight ring when on AND under sandblasted border mode */}
+                    {mirrorPower && mirrorService.id === "frosted" && (
+                      <div 
+                        className="absolute inset-2 pointer-events-none transition-all duration-700"
+                        style={{ 
+                          borderRadius: mirrorShape.id === "arch" ? "9.5rem 9.5rem 0.6rem 0.6rem" : mirrorShape.id === "pill" ? "9999px" : "9999px",
+                          border: "12px solid rgba(255,255,255,0.95)",
+                          filter: "blur(4px)",
+                          opacity: 0.95,
+                          boxShadow: `0 0 20px ${mirrorLight.hex}, inset 0 0 20px ${mirrorLight.hex}`
+                        }}
+                      />
+                    )}
+
+                    {/* Highly polished reflex shine strip */}
+                    <div className="absolute top-0 left-[-150%] w-[300%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] transform animate-[shimmer_8s_infinite] pointer-events-none z-10" />
+
+                    {/* Smart Glass digital touch interface buttons! */}
+                    <div className="absolute bottom-10 z-20 flex gap-4 bg-black/40 backdrop-blur-md py-1.5 px-3 rounded-full border border-white/15">
+                      {/* Touch 1: Ambient power button */}
+                      <button 
+                        type="button"
+                        onClick={() => setMirrorPower(!mirrorPower)}
+                        className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${mirrorPower ? "text-gold-400 scale-110" : "text-white/60 hover:text-white"}`}
+                      >
+                        <Power className="w-3.5 h-3.5" />
+                      </button>
+                      
+                      {/* Touch 2: Demister heating active indicator */}
+                      <div className="relative w-5 h-5 rounded-full flex items-center justify-center text-white/40">
+                        <Zap className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                      </div>
+                    </div>
+
+                    <div className="text-center font-sans select-none z-10 px-4 mt-[10%]">
+                      <span className="block font-mono text-[8px] tracking-[0.2em] font-bold text-gray-800/50 uppercase leading-none">
+                        VISHVA DIGITAL
+                      </span>
+                      <span className="mt-1 block font-serif text-[10px] font-semibold text-gray-700/60 lowercase leading-tight italic">
+                        {mirrorShape.name}
+                      </span>
+                    </div>
+
+                    {/* Defogging soft steam circle pattern */}
+                    <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-32 h-32 bg-white/10 blur-xl rounded-full pointer-events-none opacity-50 z-0" />
+                  </div>
+
+                  {/* Caption underneath mirror size wrapper */}
+                  <div className="mt-4 text-center font-mono text-[9px] text-gray-400 flex items-center justify-center gap-1.5">
+                    <div className={`w-2 h-2 rounded-full ${mirrorPower ? "bg-emerald-500 animate-pulse" : "bg-red-400"} transition-colors`} />
+                    <span>LED CIRCUITRY: {mirrorPower ? `ONLINE (${mirrorLight.name.split(" ")[0]})` : "STANDBY (ACTIVE DEFOG)"}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* 5. ALUMINUM ULTRA-SLIM SYSTEM WINDOW SIMULATOR */}
+              {selectedSim === "systemwindow" && (
+                <div id="product-simulator-window" className="relative w-full max-w-[345px] h-96 z-10 flex flex-col justify-between p-4 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl bg-slate-950/90 border border-white/5">
+                  <div className="absolute top-2.5 left-4 right-4 text-center z-25 bg-slate-900/40 border border-white/10 py-1.5 rounded-lg select-none">
+                    <span className="font-mono text-[8px] text-gold-400 font-bold uppercase tracking-widest block leading-none">
+                      ALUMINUM ULTRA-SLIM SYSTEM WINDOW
+                    </span>
+                    <span className="font-serif text-[11px] text-white font-semibold mt-1 block">
+                      Elevation Model: Dual-Track Slide Assembly
+                    </span>
+                  </div>
+
+                  {/* Window Casing Frame */}
+                  <div 
+                    className="flex-1 min-h-[225px] rounded-2xl border-4 relative overflow-hidden transition-all duration-500 mt-10 p-0 flex items-stretch"
+                    style={{ 
+                      borderColor: windowFrame.colorCode,
+                      backgroundColor: "rgba(10,12,18,0.9)",
+                      boxShadow: "0 15px 35px rgba(0,0,0,0.5)"
+                    }}
+                  >
+                    {/* Simulated scenic view behind window */}
+                    <div 
+                      className="absolute inset-0 opacity-20 pointer-events-none" 
+                      style={{ 
+                        backgroundImage: "linear-gradient(rgba(14, 165, 233, 0.1) 0%, rgba(220,180,100,0.1) 100%), repeating-linear-gradient(0deg, #111 0px, #111 2px, transparent 2px, transparent 15px), repeating-linear-gradient(90deg, #111 0px, #111 2px, transparent 2px, transparent 15px)"
+                      }} 
+                    />
+                    
+                    {/* Visual center vertical bar of window sash */}
+                    <div 
+                      className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-1.5 transition-colors duration-500 z-10" 
+                      style={{ backgroundColor: windowFrame.colorCode }}
+                    />
+
+                    {/* Window Panel 1: Stationary Right Side Panel */}
+                    <div 
+                      className="absolute inset-y-0 right-0 w-1/2 border-l transition-all duration-500 flex items-center justify-center p-1.5"
+                      style={{ 
+                        backgroundColor: windowGlass.color, 
+                        borderColor: windowFrame.colorCode,
+                        boxShadow: `inset 0 0 20px ${windowGlass.border}`
+                      }}
+                    >
+                      <span className="font-serif text-[8.5px] text-white/50 lowercase italic tracking-wider select-none z-10">fixed pane</span>
+                    </div>
+
+                    {/* Window Panel 2: SLIDING Left Side Panel */}
+                    <div 
+                      className="absolute inset-y-0 left-0 transition-all duration-500 border-r border-l shadow-[0_0_20px_rgba(0,0,0,0.4)] flex items-center justify-center z-20 group"
+                      style={{ 
+                        width: "50%",
+                        transform: `translateX(${windowSlide * 0.9}%)`,
+                        backgroundColor: windowGlass.color,
+                        borderColor: windowFrame.colorCode,
+                        boxShadow: `0 4px 15px rgba(0,0,0,0.4), inset 0 0 25px ${windowGlass.border}`,
+                        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s, border-color 0.5s"
+                      }}
+                    >
+                      {/* Slim vertical metal integrated pull handle grip */}
+                      <div 
+                        className="absolute right-1 w-2 hover:w-2.5 h-16 rounded transition-all duration-300 animate-pulse"
+                        style={{ backgroundColor: windowFrame.colorCode }}
+                      />
+
+                      <div className="text-center px-2 select-none z-10">
+                        <span className="block font-sans text-[7.5px] font-bold text-white/75 uppercase leading-none">VISHVA SLIDE</span>
+                        <span className="mt-0.5 block font-mono text-[7px] text-gold-400 font-bold tracking-wide">
+                          {windowSlide === 0 ? "LOCK CLOSED" : `${windowSlide}% OPEN`}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Outer sliding track helper line */}
+                    <div className="absolute bottom-1 inset-x-2 h-1 bg-white/5 rounded pointer-events-none" />
+
+                  </div>
+
+                  {/* Tactile Range slider embedded inside the visualizer! */}
+                  <div className="mt-4 px-1 space-y-1 bg-slate-900/60 border border-white/5 p-2 rounded-xl">
+                    <div className="flex justify-between items-center text-[9px] font-mono text-gray-400">
+                      <span>SLIDERS POSITION MECHANICS:</span>
+                      <span className="text-gold-400 font-bold">{windowSlide}% EXTENDED</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={windowSlide}
+                      onChange={(e) => setWindowSlide(parseInt(e.target.value))}
+                      className="w-full accent-gold-550 bg-slate-950 h-1.5 rounded-lg cursor-ew-resize focus:outline-none transition-all py-0"
+                    />
+                  </div>
+
+                  {/* Ground measurement data */}
+                  <div className="flex justify-between items-center px-1 font-mono text-[8.5px] text-gray-500 mt-2 pt-2 border-t border-white/5">
+                    <span>SPAN: 3200mm SLIDING EXTRA</span>
+                    <span>FLUSH SYSTEM THRESHOLD</span>
+                  </div>
+                </div>
+              )}
+
             </div>
 
             {/* Specs read-out dashboard footer */}
@@ -663,7 +958,7 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
                     <span className="block text-white font-semibold truncate text-[10px]">{pergolaLight.name.split(" ")[0]}</span>
                   </div>
                 </>
-              ) : (
+              ) : selectedSim === "resintable" ? (
                 <>
                   <div className="space-y-1">
                     <span>01. Timber Wood</span>
@@ -676,6 +971,36 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
                   <div className="space-y-1">
                     <span>03. Ground Legs</span>
                     <span className="block text-white font-semibold truncate text-[10px]">{tableBase.name.split(" ")[0]}</span>
+                  </div>
+                </>
+              ) : selectedSim === "smartmirror" ? (
+                <>
+                  <div className="space-y-1">
+                    <span>01. Shape Geometry</span>
+                    <span className="block text-white font-semibold truncate text-[10px]">{mirrorShape.name}</span>
+                  </div>
+                  <div className="space-y-1">
+                    <span>02. Backlight Aura</span>
+                    <span className="block text-white font-semibold truncate text-[10px]">{mirrorPower ? mirrorLight.name.split(" ")[0] : "Switched Off"}</span>
+                  </div>
+                  <div className="space-y-1">
+                    <span>03. Sandblast Band</span>
+                    <span className="block text-white font-semibold truncate text-[10px]">{mirrorService.name.split(" ")[0]}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="space-y-1">
+                    <span>01. System Frame</span>
+                    <span className="block text-white font-semibold truncate text-[10px]">{windowFrame.name}</span>
+                  </div>
+                  <div className="space-y-1">
+                    <span>02. Architectural Glass</span>
+                    <span className="block text-white font-semibold truncate text-[10px]">{windowGlass.name.split(" ")[0]}</span>
+                  </div>
+                  <div className="space-y-1">
+                    <span>03. Slide Aperture</span>
+                    <span className="block text-gold-400 font-mono font-bold text-[10px]">{windowSlide === 0 ? "Locked Closed" : `${windowSlide}% Slid Open`}</span>
                   </div>
                 </>
               )}
@@ -944,6 +1269,177 @@ export default function MaterialConfigurator({ onSendConfigToArchitect }: Materi
                         >
                           <span className="font-semibold block text-xs text-white">{tb.name}</span>
                           <span className="text-[10px] text-gray-500 font-light leading-tight">{tb.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+
+
+              {selectedSim === "smartmirror" && (
+                <>
+                  {/* Shape switchers */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 1. Choose Mirror Shape Geometry
+                    </span>
+                    <div className="grid grid-cols-3 gap-2">
+                      {MIRROR_SHAPES.map((sh) => (
+                        <button
+                          key={sh.id}
+                          type="button"
+                          onClick={() => setMirrorShape(sh)}
+                          className={`text-left px-3 py-2.5 rounded-xl border transition-all text-xs flex flex-col gap-1 cursor-pointer ${
+                            mirrorShape.id === sh.id
+                              ? "bg-slate-900 border-gold-500 text-white font-semibold"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          <span className="font-semibold block truncate">{sh.name.split(" ")[2] || sh.name.split(" ")[1]}</span>
+                          <span className="text-[9px] text-gray-500 truncate leading-none">{sh.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <p className="font-sans text-xs text-gray-400 leading-relaxed italic">
+                      {mirrorShape.desc}
+                    </p>
+                  </div>
+
+                  {/* Light color switchers */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 2. Select LED Backlight Temperature
+                    </span>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {MIRROR_LIGHTS.map((ml) => (
+                        <button
+                          key={ml.id}
+                          type="button"
+                          onClick={() => setMirrorLight(ml)}
+                          className={`text-left p-3 rounded-xl border transition-all flex items-center gap-2.5 w-full cursor-pointer ${
+                            mirrorLight.id === ml.id
+                              ? "bg-slate-900 border-gold-500 text-white font-semibold"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          <div 
+                            className="w-5 h-5 rounded-full border border-white/15"
+                            style={{ backgroundColor: ml.hex }}
+                          />
+                          <div className="flex-1 overflow-hidden leading-none">
+                            <span className="block text-xs font-semibold text-white truncate">{ml.name.split(" ")[0]}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Sandblast options */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 3. Pick Sandblasted Border Finish
+                    </span>
+                    <div className="grid grid-cols-1 gap-2">
+                      {MIRROR_SERVICES.map((ms) => (
+                        <button
+                          key={ms.id}
+                          type="button"
+                          onClick={() => setMirrorService(ms)}
+                          className={`text-left px-4 py-3 rounded-xl border transition-all text-xs flex flex-col gap-1 w-full cursor-pointer ${
+                            mirrorService.id === ms.id
+                              ? "bg-slate-900 border-gold-500 text-white font-semibold"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          <span className="font-semibold block text-xs text-white">{ms.name}</span>
+                          <span className="text-[10px] text-gray-500 font-light leading-tight">{ms.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+
+
+              {selectedSim === "systemwindow" && (
+                <>
+                  {/* Step 1. Frame Finishes */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 1. Choose Aluminum Frame Profile Finish
+                    </span>
+                    <div className="grid grid-cols-1 gap-2">
+                      {WINDOW_FRAMES.map((wf) => (
+                        <button
+                          key={wf.id}
+                          type="button"
+                          onClick={() => setWindowFrame(wf)}
+                          className={`text-left px-4 py-3 rounded-xl border transition-all text-xs flex flex-col gap-1 w-full cursor-pointer ${
+                            windowFrame.id === wf.id
+                              ? "bg-slate-900 border-gold-500 text-white font-semibold"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <div 
+                              className="w-4 h-4 rounded-full border border-white/10"
+                              style={{ backgroundColor: wf.colorCode }}
+                            />
+                            <span className="font-semibold block text-xs text-white">{wf.name}</span>
+                          </div>
+                          <span className="text-[10px] text-gray-500 font-light leading-tight">{wf.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Step 2. Acoustic Glass */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 2. Select Acoustic Glass Performance Pane
+                    </span>
+                    <div className="grid grid-cols-1 gap-2">
+                      {WINDOW_GLASSES.map((wg) => (
+                        <button
+                          key={wg.id}
+                          type="button"
+                          onClick={() => setWindowGlass(wg)}
+                          className={`text-left px-4 py-3 rounded-xl border transition-all text-xs flex flex-col gap-1 w-full cursor-pointer ${
+                            windowGlass.id === wg.id
+                              ? "bg-slate-900 border-gold-500 text-white font-semibold"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          <span className="font-semibold block text-xs text-white">{wg.name}</span>
+                          <span className="text-[10px] text-gray-500 font-light leading-tight">{wg.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Step 3. Slide presets */}
+                  <div className="space-y-3">
+                    <span className="block font-mono text-[10px] text-gold-400 tracking-widest uppercase font-semibold">
+                      Step 3. Configure Slide Position Quick Presets
+                    </span>
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { label: "0% Locked", val: 0 },
+                        { label: "50% Halfway", val: 50 },
+                        { label: "100% Full Open", val: 100 }
+                      ].map((preset) => (
+                        <button
+                          key={preset.val}
+                          type="button"
+                          onClick={() => setWindowSlide(preset.val)}
+                          className={`py-2 px-3 rounded-xl border transition-all text-[11px] font-sans text-center cursor-pointer ${
+                            windowSlide === preset.val
+                              ? "bg-gold-500/20 border-gold-400 text-white font-semibold shadow-md"
+                              : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          }`}
+                        >
+                          {preset.label}
                         </button>
                       ))}
                     </div>

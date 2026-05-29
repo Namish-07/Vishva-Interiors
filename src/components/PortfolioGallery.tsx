@@ -8,7 +8,7 @@ import WordReveal from "./WordReveal";
 
 interface PortfolioGalleryProps {
   initialSubCategoryId?: string;
-  onSelectProjectForEnquiry: (projectTitle: string) => void;
+  onSelectProjectForEnquiry: (projectTitle: string, categoryId?: string) => void;
 }
 
 export default function PortfolioGallery({ initialSubCategoryId, onSelectProjectForEnquiry }: PortfolioGalleryProps) {
@@ -142,7 +142,7 @@ export default function PortfolioGallery({ initialSubCategoryId, onSelectProject
   };
 
   const triggerEnquiry = (proj: Project) => {
-    onSelectProjectForEnquiry(proj.title);
+    onSelectProjectForEnquiry(proj.title, proj.category);
     setActiveProject(null); // Close lightbox
   };
 

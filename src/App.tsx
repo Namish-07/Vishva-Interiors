@@ -97,8 +97,8 @@ export default function App() {
   };
 
   // Connects Portfolio Lightbox Enquiry to Contact Form Pre-fill
-  const handleSelectProjectForEnquiry = (projectTitle: string) => {
-    setPreFilledInterest("glass"); // default to glass or general
+  const handleSelectProjectForEnquiry = (projectTitle: string, categoryId?: string) => {
+    setPreFilledInterest(categoryId || "glass");
     setPreFilledMessage(
       `Hi! I am extremely interested in the following signature project design: "${projectTitle}". Please provide raw materials compliance details, custom dimension sizing options, and an estimated quotation sheet for a similar setup.`
     );
@@ -117,8 +117,8 @@ export default function App() {
   };
 
   // Connects Interactive Sandbox Configurator specs to Contact Form Pre-fill
-  const handleSendConfigToArchitect = (configSummary: string) => {
-    setPreFilledInterest("glass"); // general
+  const handleSendConfigToArchitect = (configSummary: string, categoryId?: string) => {
+    setPreFilledInterest(categoryId || "glass");
     setPreFilledMessage(
       `Greetings! I have experimented with your Interactive Studio Configurator and compiled a desired specification package:\n\n${configSummary}\n\nPlease let me know if an on-site design review in Andhra Pradesh can be scheduled to draft these combinations.`
     );
