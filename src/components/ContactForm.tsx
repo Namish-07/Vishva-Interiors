@@ -195,7 +195,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
         </div>
 
         {/* The Hub Main GRID */}
-        <div id="consultation-form" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pt-12 border-t border-white/5">
+        <div id="enquiry-form" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pt-12 border-t border-white/5">
           
           {/* LEFT SIDE: HQ & Branch Office Coordinates */}
           <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
@@ -205,7 +205,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
               </span>
               <WordReveal 
                 as="h2"
-                text="Book a Private Design Consultation"
+                text="Enquire Now for Bespoke Design"
                 className="font-serif text-3xl md:text-4.5xl font-bold tracking-tight text-white leading-tight block"
               />
               <WordReveal
@@ -530,7 +530,7 @@ export default function ContactForm({ preFilledInterest, preFilledMessage }: Con
                       className="group w-full py-4 px-6 rounded-xl bg-gradient-to-r from-gold-550 to-gold-450 hover:from-gold-600 hover:to-gold-400 text-white font-sans text-xs tracking-widest uppercase font-semibold transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <span>
-                        {submitting ? "Processing specification..." : "Dispatch Secure Consultation Request"}
+                        {submitting ? "Processing specification..." : "Dispatch Secure Enquiry"}
                       </span>
                       <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </button>

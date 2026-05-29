@@ -3,7 +3,7 @@ import { ArrowRight, Play, Award, Sparkles, Building2, CheckCircle2 } from "luci
 
 interface HeroProps {
   onLearnMore: () => void;
-  onBookConsultation: () => void;
+  onEnquireNow: () => void;
 }
 
 const HERO_SLIDES = [
@@ -27,7 +27,7 @@ const HERO_SLIDES = [
   }
 ];
 
-export default function Hero({ onLearnMore, onBookConsultation }: HeroProps) {
+export default function Hero({ onLearnMore, onEnquireNow }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -94,10 +94,10 @@ export default function Hero({ onLearnMore, onBookConsultation }: HeroProps) {
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <button
               type="button"
-              onClick={onBookConsultation}
+              onClick={onEnquireNow}
               className="group flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-gold-650 to-gold-500 hover:from-gold-600 hover:to-gold-400 text-white font-sans text-xs tracking-widest uppercase font-semibold transition-all duration-300 shadow-xl hover:shadow-gold-500/20"
             >
-              Start Consulting
+              Enquire Now
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
 

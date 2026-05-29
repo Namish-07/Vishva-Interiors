@@ -141,11 +141,11 @@ export default function Header({
           {/* Quick contact trigger */}
           <button
             type="button"
-            onClick={() => handleNavClick("consultation-form")}
+            onClick={() => handleNavClick("enquiry-form")}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold-500/10 hover:bg-gold-500 border border-gold-400/20 hover:border-gold-400/50 text-gold-300 hover:text-white font-sans text-[10px] tracking-widest uppercase font-semibold transition-all duration-300 shadow-md hover:shadow-gold-500/20"
           >
             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-            Book Consultation
+            Enquire Now
           </button>
 
           {/* Premium Theme Switcher */}
@@ -183,10 +183,10 @@ export default function Header({
           )}
           <button
             type="button"
-            onClick={() => handleNavClick("consultation-form")}
+            onClick={() => handleNavClick("enquiry-form")}
             className="px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-400/20 text-gold-400 font-sans text-[9px] tracking-widest uppercase font-medium"
           >
-            Consult
+            Enquire
           </button>
           <button
             type="button"

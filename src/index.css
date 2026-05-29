@@ -79,8 +79,8 @@ body {
 /* ================= EXQUISITE LIGHT THEME HANDLERS ================= */
 
 .light body {
-  background-color: #f7f9fc !important;
-  color: #1e293b !important;
+  background-color: #ece8dd !important; /* Luxury warm travertine-limestone backdrop, gentle on eyes */
+  color: #1c2330 !important;
 }
 
 /* Blueprint Architecture Grids */
@@ -105,7 +105,7 @@ body {
 
 /* Scrollbar adjustment */
 .light ::-webkit-scrollbar-track {
-  background: #f1f5f9 !important;
+  background: #e5e0d3 !important;
 }
 .light ::-webkit-scrollbar-thumb {
   background: #c4a159 !important;
@@ -116,22 +116,22 @@ body {
 
 /* Elegant Text overrides to maintain perfect premium clarity */
 .light .text-white {
-  color: #0f172a !important;
+  color: #1c2330 !important;
 }
 .light .text-gray-100 {
-  color: #0f172a !important;
+  color: #1c2330 !important;
 }
 .light .text-gray-200 {
-  color: #1e293b !important;
+  color: #2b3a4a !important;
 }
 .light .text-gray-300 {
-  color: #334155 !important;
+  color: #3e4f63 !important;
 }
 .light .text-gray-400 {
-  color: #475569 !important;
+  color: #53657b !important;
 }
 .light .text-gray-500 {
-  color: #64748b !important;
+  color: #6a7f98 !important;
 }
 
 /* Subtle adjust on gold values for beautiful premium contrast */
@@ -145,26 +145,60 @@ body {
   color: #976b2f !important;
 }
 
-/* Background panel replacements */
+/* Background panel replacements for Luxury Warm Travertine and Cream Alabaster Theme */
 .light .bg-slate-950 {
-  background-color: #f8fafc !important;
+  background-color: #dfd9cc !important; /* deeper warm beige for contrast/depth */
 }
 .light .bg-slate-925 {
-  background-color: #f1f5f9 !important;
+  background-color: #e6e0d3 !important;
 }
 .light .bg-slate-900 {
-  background-color: #ffffff !important;
+  background-color: #f4f1e8 !important; /* beautiful clean alabaster card */
 }
-.light .bg-slate-900\/50,
-.light .bg-slate-900\/60,
-.light .bg-slate-950\/40,
+
+/* Opacity variants used in headers, configurator slots, modals and widgets */
+.light .bg-slate-950\/98 {
+  background-color: rgba(223, 217, 204, 0.98) !important;
+}
+.light .bg-slate-950\/90 {
+  background-color: rgba(223, 217, 204, 0.9) !important;
+}
 .light .bg-slate-950\/80 {
-  background-color: rgba(255, 255, 255, 0.85) !important;
+  background-color: rgba(223, 217, 204, 0.8) !important;
+}
+.light .bg-slate-950\/60 {
+  background-color: rgba(223, 217, 204, 0.6) !important;
+}
+.light .bg-slate-950\/40 {
+  background-color: rgba(223, 217, 204, 0.4) !important;
+}
+
+.light .bg-slate-925\/90 {
+  background-color: rgba(230, 224, 211, 0.95) !important; /* Scrolled header background */
+}
+
+.light .bg-slate-900\/90 {
+  background-color: rgba(244, 241, 232, 0.9) !important;
+}
+.light .bg-slate-900\/80 {
+  background-color: rgba(244, 241, 232, 0.8) !important;
+}
+.light .bg-slate-900\/60 {
+  background-color: rgba(244, 241, 232, 0.6) !important;
+}
+.light .bg-slate-900\/50 {
+  background-color: rgba(244, 241, 232, 0.5) !important;
+}
+.light .bg-slate-900\/40 {
+  background-color: rgba(244, 241, 232, 0.4) !important;
+}
+.light .bg-slate-900\/30 {
+  background-color: rgba(244, 241, 232, 0.3) !important;
 }
 
 /* Crystalline luxury glass sheet feel */
 .light .glass-panel {
-  background: rgba(255, 255, 255, 0.82) !important;
+  background: rgba(244, 241, 232, 0.82) !important;
   backdrop-filter: blur(14px) !important;
   border: 1px solid rgba(177, 132, 59, 0.15) !important;
   box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.05) !important;
@@ -172,10 +206,10 @@ body {
 
 /* Overriding dark background overlays to look light/gold */
 .light .bg-gradient-to-t.from-slate-950 {
-  background-image: linear-gradient(to top, #f8fafc, rgba(248, 250, 252, 0.45), rgba(248, 250, 252, 0)) !important;
+  background-image: linear-gradient(to top, #ece8dd, rgba(236, 232, 221, 0.45), rgba(236, 232, 221, 0)) !important;
 }
 .light .bg-gradient-to-b.from-slate-950 {
-  background-image: linear-gradient(to bottom, #f8fafc, rgba(248, 250, 252, 0.45), rgba(248, 250, 252, 0)) !important;
+  background-image: linear-gradient(to bottom, #ece8dd, rgba(236, 232, 221, 0.45), rgba(236, 232, 221, 0)) !important;
 }
 
 .light .border-white\/5 {
@@ -205,7 +239,7 @@ body {
 .light #home h5, 
 .light #home p, 
 .light #home h4 {
-  color: #0f172a !important;
+  color: #1c2330 !important;
 }
 
 /* Detailed Services accordion items */
@@ -219,13 +253,13 @@ body {
 
 /* Material Configurator slots */
 .light .interactive-phone {
-  background: #ffffff !important;
+  background: #fdfcfb !important;
   box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08) !important;
 }
 
 /* Portfolio elements */
 .light .group.block.relative.overflow-hidden {
-  background-color: #ffffff !important;
+  background-color: #fdfcfb !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
 }
 .light .group.block.relative.overflow-hidden:hover {
@@ -234,7 +268,7 @@ body {
 
 /* Mobile responsive drawer background for Light mode */
 .light .lg\:hidden.fixed {
-  background-color: rgba(255, 255, 255, 0.98) !important;
+  background-color: rgba(230, 224, 211, 0.98) !important;
   box-shadow: 0 40px 80px rgba(0,0,0,0.1) !important;
 }
 
@@ -242,18 +276,19 @@ body {
 .light input, 
 .light textarea, 
 .light select {
-  background-color: #ffffff !important;
+  background-color: #f7f5ef !important;
   border-color: rgba(0, 0, 0, 0.1) !important;
-  color: #0f172a !important;
+  color: #1c2330 !important;
 }
 .light input:focus, 
 .light textarea:focus, 
 .light select:focus {
   border-color: #b1843b !important;
+  background-color: #ffffff !important;
   box-shadow: 0 0 0 2px rgba(177, 132, 59, 0.15) !important;
 }
 .light .bg-slate-950\/60 {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(244, 241, 232, 0.8) !important;
 }
 
 /* Global shadows and subtle gold backdrops */

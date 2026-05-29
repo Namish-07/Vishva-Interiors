@@ -57,7 +57,7 @@ export default function App() {
   }, [theme]);
 
   const handleScrollToSection = (sectionId: string) => {
-    const targetId = sectionId === "contact" ? "consultation-form" : sectionId;
+    const targetId = sectionId === "contact" ? "enquiry-form" : sectionId;
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
       let headerOffset = 100;
@@ -65,7 +65,7 @@ export default function App() {
         headerOffset = 0;
       } else if (sectionId === "portfolio") {
         headerOffset = 140; // Roomy offset to see the portfolio title and top selections clearly
-      } else if (sectionId === "consultation-form" || sectionId === "contact") {
+      } else if (sectionId === "enquiry-form" || sectionId === "contact") {
         headerOffset = 135; // Roomy headroom to view the form header perfectly
       }
       const elementPosition = targetElement.getBoundingClientRect().top;
@@ -103,7 +103,7 @@ export default function App() {
       `Hi! I am extremely interested in the following signature project design: "${projectTitle}". Please provide raw materials compliance details, custom dimension sizing options, and an estimated quotation sheet for a similar setup.`
     );
     setTimeout(() => {
-      const contactElem = document.getElementById("consultation-form");
+      const contactElem = document.getElementById("enquiry-form");
       if (contactElem) {
         const headerOffset = 135; // Roomy headroom so header is fully visible below the sticky bar
         const elementPosition = contactElem.getBoundingClientRect().top;
@@ -120,10 +120,10 @@ export default function App() {
   const handleSendConfigToArchitect = (configSummary: string) => {
     setPreFilledInterest("glass"); // general
     setPreFilledMessage(
-      `Greetings! I have experimented with your Interactive Studio Configurator and compiled a desired specification package:\n\n${configSummary}\n\nPlease let me know if an on-site consultation in Andhra Pradesh can be scheduled to draft these combinations.`
+      `Greetings! I have experimented with your Interactive Studio Configurator and compiled a desired specification package:\n\n${configSummary}\n\nPlease let me know if an on-site design review in Andhra Pradesh can be scheduled to draft these combinations.`
     );
     setTimeout(() => {
-      const contactElem = document.getElementById("consultation-form");
+      const contactElem = document.getElementById("enquiry-form");
       if (contactElem) {
         const headerOffset = 135; // Roomy headroom to showcase the booking details cleanly
         const elementPosition = contactElem.getBoundingClientRect().top;
@@ -193,7 +193,7 @@ export default function App() {
       {/* 2. Panoramic Slider Intro */}
       <Hero 
         onLearnMore={() => handleScrollToSection("services")} 
-        onBookConsultation={() => handleScrollToSection("consultation-form")} 
+        onEnquireNow={() => handleScrollToSection("enquiry-form")} 
       />
 
       {/* 3. Detailed Services Accordions */}
@@ -215,7 +215,7 @@ export default function App() {
       {/* 6. HeritageTimeline About Block */}
       <AboutSection />
 
-      {/* 7. Contact Consultation Form Booking */}
+      {/* 7. Contact Enquiry Form Booking */}
       <ContactForm 
         preFilledInterest={preFilledInterest} 
         preFilledMessage={preFilledMessage} 
